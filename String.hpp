@@ -35,12 +35,10 @@ namespace String
             new_str += str[i];
         return new_str;
     }
-    std::string remove(const std::string str, const std::string rem, int a = -1, int b = -1)
+    std::string remove(const std::string str, const std::string rem)
     {
         if(rem.length() <= 0 || str.length() <= 0)
             return str;
-        a = a < 0 ? 0 : a;
-        b =(b > str.length() - 1 || b < a) ? str.length() - 1 : b;
         bool done = false;
         std::string newstr = str;
         while(!done)
@@ -53,12 +51,10 @@ namespace String
         }
         return newstr;
     }
-    std::string replace(const std::string str, const std::string del, const std::string rep,int a = -1, int b = -1)
+    std::string replace(const std::string str, const std::string del, const std::string rep)
     {
         if(str.length() <= 0 || del.length() <= 0 || rep.length() <= 0)
             return str;
-        a = a < 0 ? 0 : a;
-        b = (b > str.length() - 1 || b < a) ? str.length() - 1 : b;
         bool done = false;
         std::string newstr = str;
         while(!done)

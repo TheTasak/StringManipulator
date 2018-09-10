@@ -9,6 +9,7 @@
 #define ERROR_ARGUMENT1_SIZE "Argument no.1 is too big"
 #define ERROR_ARGUMENT2_SIZE "Argument no.2 is too big"
 #define ERROR_ARGUMENT_SIZE "Input is too big"
+#define ERROR_NOTSPECIFIED "Argument not specified"
 
 #define X_SIZE 112
 #define Y_SIZE 13
