@@ -140,6 +140,14 @@ namespace Command
         else
             Out::print("Values not specified");
     }
+    template <typename T>
+    std::string resultUpdate(std::string str,std::string (*pointer)(T))
+    {
+        if(str == "!" && String::lastResult != "")
+            String::lastResult = pointer(String::lastResult);
+        else
+            String::lastResult = pointer(str);
+    }
     void basicCommand(std::string s,int toWhat)
     {
         std::size_t beginstr = s.find("(");
@@ -147,69 +155,41 @@ namespace Command
         if(beginstr != std::string::npos && endstr != std::string::npos)
         {
             std::string str = s.substr(beginstr+1, endstr - beginstr - 1);
+            std::string (*pointer)(std::string);
             switch(toWhat)
             {
             case UPPER:
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::to_upper(String::lastResult);
-                else
-                    String::lastResult = String::to_upper(str);
+                pointer = &String::to_upper;
                 break;
             case LOWER:
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::to_lower(String::lastResult);
-                else
-                    String::lastResult = String::to_lower(str);
+                pointer = &String::to_lower;
                 break;
             case BINARY:
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::to_binary(String::lastResult);
-                else
-                    String::lastResult = String::to_binary(str);
+                pointer = &String::to_binary;
                 break;
             case HEX:
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::to_hex(String::lastResult);
-                else
-                    String::lastResult = String::to_hex(str);
+                pointer = &String::to_hex;
                 break;
             case BIN_TO_DEC:
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::bin_to_dec(String::lastResult);
-                else
-                    String::lastResult = String::bin_to_dec(str);
+                pointer = &String::bin_to_dec;
                 break;
             case BIN_TO_HEX:
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::bin_to_hex(String::lastResult);
-                else
-                    String::lastResult = String::bin_to_hex(str);
+                pointer = &String::bin_to_hex;
                 break;
             case IS_DIGIT:
-                bool isDigit;
-                if(str == "!" && String::lastResult != "")
-                    isDigit = String::is_digit(String::lastResult);
-                else
-                    isDigit = String::is_digit(str);
-                isDigit ? Out::print("1") : Out::print("0");
+                pointer = &String::is_digit;
                 break;
              case IS_PRIME:
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::is_prime(String::lastResult);
-                else
-                    String::lastResult = String::is_prime(str);
+                pointer = &String::is_prime;
                 break;
             case LIST_PRIME:
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::listPrime(String::lastResult);
-                else
-                    String::lastResult = String::listPrime(str);
+                pointer = &String::listPrime;
                 break;
             default:
                 break;
             }
-            if(toWhat != IS_DIGIT)
-                Out::print(String::lastResult);
+            resultUpdate(str,pointer);
+            Out::print(String::lastResult);
         }
         else
             Out::print("Values not specified");

@@ -71,14 +71,14 @@ namespace String
         }
         return newstr;
     }
-    bool is_digit(const std::string str)
+    std::string is_digit(const std::string str)
     {
         for(char c : str)
         {
             if(!isdigit(c))
-                return false;
+                return "False";
         }
-        return true;
+        return "True";
     }
     std::string error_size(std::string s, int i, std::string error)
     {
@@ -91,7 +91,7 @@ namespace String
     }
     std::string error_isdigit(std::string s, std::string error)
     {
-        if(!String::is_digit(s))
+        if(String::is_digit(s) == "False")
         {
             Out::print(error);
             return "";
@@ -193,9 +193,9 @@ namespace String
         for(i = 2; i <= n / 2; ++i)
         {
             if(n % i == 0)
-                return "No";
+                return "False";
         }
-        return "Yes";
+        return "True";
     }
     void basicOperation(const std::string a, int operation)
     {
