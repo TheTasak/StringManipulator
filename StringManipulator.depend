@@ -22,3 +22,26 @@
 	"windows.h"
 	"Utilities.hpp"
 
+1536598789 source:f:\progra\stringmanipulator\stringmanipulator\main.cpp
+	"Command.hpp"
+
+1536599127 f:\progra\stringmanipulator\stringmanipulator\command.hpp
+	"Utilities.hpp"
+	"String.hpp"
+
+1536598026 f:\progra\stringmanipulator\stringmanipulator\utilities.hpp
+	<iostream>
+	"windows.h"
+
+1536599883 f:\progra\stringmanipulator\stringmanipulator\string.hpp
+	<string>
+	<cmath>
+	<vector>
+	<bitset>
+	<iomanip>
+	<sstream>
+	<list>
+	<iostream>
+	"windows.h"
+	"Utilities.hpp"
+

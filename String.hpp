@@ -320,6 +320,6 @@ namespace String
         }
         lis.erase(1);
         lis.erase(0);*/
-        return "";
+        return list_to_string(lis);
     }
 }
