@@ -40,159 +40,152 @@ namespace Command
         Out::print("is_digit(string) - checks if all characters are numerical",true);
         Out::print("is_prime(int) - checks if number is prime");
     }
-    void reverseCommand(std::string s)
+    template <typename T>
+    void resultUpdate(std::string (*pointer)(T), std::string one, std::string two = "")
     {
-        std::size_t beginstr = s.find("(");
-        std::size_t endstr = s.find(")");
-        if(beginstr != std::string::npos && endstr != std::string::npos)
-        {
-            std::string str = s.substr(beginstr+1, endstr - beginstr - 1);
-            if(str == "!" && String::lastResult != "")
-                String::lastResult = String::reverse(String::lastResult);
-            else
-                String::lastResult = String::reverse(str);
-
-            Out::print(String::lastResult);
-        }
+        if(one == "!" && String::lastResult != "")
+            String::lastResult = pointer(String::lastResult);
         else
-            Out::print("Values not specified");
+            String::lastResult = pointer(one);
     }
-    void multiplyCommand(std::string s)
+    template <typename T>
+    void resultUpdate(std::string (*pointer)(T,T), std::string one, std::string two)
+    {
+        if(one == "!" && String::lastResult != "")
+            String::lastResult = pointer(String::lastResult,two);
+        else if(two == "!" && String::lastResult != "")
+            String::lastResult = pointer(one,String::lastResult);
+        else if(two == "!" && one == "!" && String::lastResult != "")
+            String::lastResult = pointer(String::lastResult,String::lastResult);
+        else
+            String::lastResult = pointer(one,two);
+    }
+    template <typename T>
+    void resultUpdate(std::string (*pointer)(T,T,T), std::string one, std::string two,std::string three)
+    {
+        if(one == "!" && String::lastResult != "")
+            String::lastResult = pointer(String::lastResult,two,three);
+        else if(two == "!" && String::lastResult != "")
+            String::lastResult = pointer(one,String::lastResult,three);
+        else if(three == "!" && String::lastResult != "")
+            String::lastResult = pointer(one,two,String::lastResult);
+        else if(two == "!" && one == "!" && String::lastResult != "")
+            String::lastResult = pointer(String::lastResult,String::lastResult,three);
+        else if(two == "!" && three == "!" && String::lastResult != "")
+            String::lastResult = pointer(one,String::lastResult,String::lastResult);
+        else if(one == "!" && three == "!" && String::lastResult != "")
+            String::lastResult = pointer(String::lastResult,two,String::lastResult);
+        else
+            String::lastResult = pointer(one,two,three);
+    }
+    void command(std::string s,int type,int arguments = 1)
     {
         std::size_t beginstr = s.find("(");
-        std::size_t comma = s.find(",");
         std::size_t endstr = s.find(")");
-        std::string str = "";
-        int multiply = 0;
-        if(comma != std::string::npos)
+        std::string first;
+        if(arguments == 1)
         {
             if(beginstr != std::string::npos && endstr != std::string::npos)
             {
-                str = s.substr(beginstr+1, comma - beginstr - 1);
-                std::string buf = s.substr(comma+1, endstr - comma - 1);
-                multiply = std::stoi(buf);
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::multiply(String::lastResult, multiply);
-                else
-                    String::lastResult = String::multiply(str, multiply);
-
-                Out::print(String::lastResult);
-            }
-        }
-        else if(beginstr != std::string::npos && endstr != std::string::npos)
-        {
-            str = s.substr(beginstr+1, endstr - beginstr - 1);
-            str.erase(str.end() - 1);
-            if(str == "!" && String::lastResult != "")
-                String::lastResult = String::multiply(String::lastResult);
-            else
-                String::lastResult = String::multiply(str);
-
-            Out::print(String::lastResult);
-        }
-        else
-            Out::print("Values not specified");
-    }
-    void removeCommand(std::string s)
-    {
-        std::size_t beginstr = s.find("(");
-        std::size_t comma = s.find(",");
-        std::size_t endstr = s.find(")");
-        std::string str, removal;
-        if(comma != std::string::npos && beginstr != std::string::npos && endstr != std::string::npos)
-        {
-            str = s.substr(beginstr+1, comma - beginstr - 1);
-            removal = s.substr(comma+1, endstr - comma - 1);
-            if(str == "!" && String::lastResult != "")
-                String::lastResult = String::remove(String::lastResult,removal);
-            else
-                String::lastResult = String::remove(str, removal);
-
-            Out::print(String::lastResult);
-        }
-        else
-            Out::print("Values not specified");
-    }
-    void replaceCommand(std::string s)
-    {
-        std::size_t beginstr = s.find("(");
-        std::size_t comma = s.find(",");
-        std::size_t endstr = s.find(")");
-        std::string str, removal, replacer;
-        if(comma != std::string::npos)
-        {
-            std::size_t comma_sec = s.find(",", comma+1);
-            if(comma_sec != std::string::npos && beginstr != std::string::npos && endstr != std::string::npos)
-            {
-                str = s.substr(beginstr+1, comma - beginstr - 1);
-                removal = s.substr(comma+1, comma_sec - comma - 1);
-                replacer = s.substr(comma_sec+1, endstr - comma_sec - 1);
-                if(str == "!" && String::lastResult != "")
-                    String::lastResult = String::replace(String::lastResult, removal, replacer);
-                else
-                    String::lastResult = String::replace(str, removal, replacer);
-
+                first = s.substr(beginstr+1, endstr - beginstr - 1);
+                std::string (*pointer)(std::string);
+                switch(type)
+                {
+                case UPPER:
+                    pointer = &String::to_upper;
+                    break;
+                case LOWER:
+                    pointer = &String::to_lower;
+                    break;
+                case BINARY:
+                    pointer = &String::to_binary;
+                    break;
+                case HEX:
+                    pointer = &String::to_hex;
+                    break;
+                case BIN_TO_DEC:
+                    pointer = &String::bin_to_dec;
+                    break;
+                case BIN_TO_HEX:
+                    pointer = &String::bin_to_hex;
+                    break;
+                case IS_DIGIT:
+                    pointer = &String::is_digit;
+                    break;
+                 case IS_PRIME:
+                    pointer = &String::is_prime;
+                    break;
+                case LIST_PRIME:
+                    pointer = &String::listPrime;
+                    break;
+                case REVERSE:
+                    pointer = &String::reverse;
+                    break;
+                default:
+                    break;
+                }
+                resultUpdate(pointer,first);
                 Out::print(String::lastResult);
             }
             else
                 Out::print("Values not specified");
         }
-        else
-            Out::print("Values not specified");
-    }
-    template <typename T>
-    std::string resultUpdate(std::string str,std::string (*pointer)(T))
-    {
-        if(str == "!" && String::lastResult != "")
-            String::lastResult = pointer(String::lastResult);
-        else
-            String::lastResult = pointer(str);
-    }
-    void basicCommand(std::string s,int toWhat)
-    {
-        std::size_t beginstr = s.find("(");
-        std::size_t endstr = s.find(")");
-        if(beginstr != std::string::npos && endstr != std::string::npos)
+        else if(arguments == 2)
         {
-            std::string str = s.substr(beginstr+1, endstr - beginstr - 1);
-            std::string (*pointer)(std::string);
-            switch(toWhat)
+            std::size_t comma = s.find(",");
+            if(comma != std::string::npos && beginstr != std::string::npos && endstr != std::string::npos)
             {
-            case UPPER:
-                pointer = &String::to_upper;
-                break;
-            case LOWER:
-                pointer = &String::to_lower;
-                break;
-            case BINARY:
-                pointer = &String::to_binary;
-                break;
-            case HEX:
-                pointer = &String::to_hex;
-                break;
-            case BIN_TO_DEC:
-                pointer = &String::bin_to_dec;
-                break;
-            case BIN_TO_HEX:
-                pointer = &String::bin_to_hex;
-                break;
-            case IS_DIGIT:
-                pointer = &String::is_digit;
-                break;
-             case IS_PRIME:
-                pointer = &String::is_prime;
-                break;
-            case LIST_PRIME:
-                pointer = &String::listPrime;
-                break;
-            default:
-                break;
+                first = s.substr(beginstr+1, comma - beginstr - 1);
+                std::string second = s.substr(comma+1, endstr - comma - 1);
+                std::string (*pointer)(std::string,std::string);
+                switch(type)
+                {
+                case MULTIPLY_CHAR:
+                    pointer = &String::multiply;
+                    break;
+                case REMOVE:
+                    pointer = &String::remove;
+                    break;
+                default:
+                    break;
+                }
+                resultUpdate(pointer,first,second);
+                Out::print(String::lastResult);
             }
-            resultUpdate(str,pointer);
-            Out::print(String::lastResult);
+            else
+                Out::print("Values not specified");
+        }
+        else if(arguments == 3)
+        {
+            std::size_t comma = s.find(",");
+            if(comma != std::string::npos)
+            {
+                std::size_t comma_sec = s.find(",", comma+1);
+                std::string second,third;
+                std::string (*pointer)(std::string,std::string,std::string);
+                if(comma_sec != std::string::npos && beginstr != std::string::npos && endstr != std::string::npos)
+                {
+                    first = s.substr(beginstr+1, comma - beginstr - 1);
+                    second = s.substr(comma+1, comma_sec - comma - 1);
+                    third = s.substr(comma_sec+1, endstr - comma_sec - 1);
+                    switch(type)
+                    {
+                    case REPLACE:
+                        pointer = &String::replace;
+                        break;
+                    default:
+                        break;
+                    }
+                    resultUpdate(pointer,first,second,third);
+                    Out::print(String::lastResult);
+                }
+                else
+                    Out::print("Values not specified");
+            }
         }
         else
             Out::print("Values not specified");
+        }
     }
     void operationCommand(std::string s, int type)
     {
@@ -227,4 +220,3 @@ namespace Command
         else
             Out::print("Values not specified");
     }
-}

@@ -15,7 +15,7 @@
 #define Y_SIZE 13
 #define SCREEN_SIZE 30
 
-#define LOWER 0
+#define LOWER 0 // 1 argument
 #define UPPER 1
 #define BINARY 2
 #define HEX 3
@@ -24,6 +24,12 @@
 #define BIN_TO_HEX 6
 #define IS_PRIME 7
 #define LIST_PRIME 8
+#define REVERSE 9
+
+#define REMOVE 0 // 2 argument
+#define MULTIPLY_CHAR 1
+
+#define REPLACE 0 // 3 argument
 
 #define ADD 0
 #define SUBTRACT 1

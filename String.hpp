@@ -17,17 +17,6 @@ namespace String
     std::string lastResult;
     long long accumulator = 0;
 
-    std::string multiply(const std::string str = "", int n = 1)
-    {
-        n--;
-        std::string str_copy = str;
-        while(n > 0)
-        {
-            str_copy += str;
-            n--;
-        }
-        return str_copy;
-    }
     std::string reverse(const std::string str = "")
     {
         std::string new_str = "";
@@ -93,6 +82,22 @@ namespace String
             return "";
         }
         return "a";
+    }
+    std::string multiply(const std::string str, const std::string i)
+    {
+        if(error_isdigit(i,ERROR_ARGUMENT2_TYPE) == "")
+            return "";
+        if(error_size(i,9,ERROR_ARGUMENT2_SIZE) == "")
+            return "";
+        int n = std::stoi(i);
+        n--;
+        std::string str_copy = str;
+        while(n > 0)
+        {
+            str_copy += str;
+            n--;
+        }
+        return str_copy;
     }
     std::string to_upper(const std::string str)
     {

@@ -45,18 +45,18 @@
 	"windows.h"
 	"Utilities.hpp"
 
-1536607635 source:c:\users\saturn\desktop\c++\stringmanipulator\main.cpp
+1536684768 source:c:\users\saturn\desktop\c++\stringmanipulator\main.cpp
 	"Command.hpp"
 
-1536608420 c:\users\saturn\desktop\c++\stringmanipulator\command.hpp
+1536684913 c:\users\saturn\desktop\c++\stringmanipulator\command.hpp
 	"Utilities.hpp"
 	"String.hpp"
 
-1536607635 c:\users\saturn\desktop\c++\stringmanipulator\utilities.hpp
+1536684525 c:\users\saturn\desktop\c++\stringmanipulator\utilities.hpp
 	<iostream>
 	"windows.h"
 
-1536608484 c:\users\saturn\desktop\c++\stringmanipulator\string.hpp
+1536684634 c:\users\saturn\desktop\c++\stringmanipulator\string.hpp
 	<string>
 	<cmath>
 	<vector>
