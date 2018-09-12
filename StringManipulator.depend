@@ -48,7 +48,7 @@
 1536684768 source:c:\users\saturn\desktop\c++\stringmanipulator\main.cpp
 	"Command.hpp"
 
-1536684913 c:\users\saturn\desktop\c++\stringmanipulator\command.hpp
+1536768905 c:\users\saturn\desktop\c++\stringmanipulator\command.hpp
 	"Utilities.hpp"
 	"String.hpp"
 
@@ -56,7 +56,7 @@
 	<iostream>
 	"windows.h"
 
-1536684634 c:\users\saturn\desktop\c++\stringmanipulator\string.hpp
+1536769067 c:\users\saturn\desktop\c++\stringmanipulator\string.hpp
 	<string>
 	<cmath>
 	<vector>

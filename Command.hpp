@@ -41,7 +41,7 @@ namespace Command
         Out::print("is_prime(int) - checks if number is prime");
     }
     template <typename T>
-    void resultUpdate(std::string (*pointer)(T), std::string one, std::string two = "")
+    void resultUpdate(std::string (*pointer)(T), std::string one)
     {
         if(one == "!" && String::lastResult != "")
             String::lastResult = pointer(String::lastResult);
@@ -51,32 +51,19 @@ namespace Command
     template <typename T>
     void resultUpdate(std::string (*pointer)(T,T), std::string one, std::string two)
     {
-        if(one == "!" && String::lastResult != "")
-            String::lastResult = pointer(String::lastResult,two);
-        else if(two == "!" && String::lastResult != "")
-            String::lastResult = pointer(one,String::lastResult);
-        else if(two == "!" && one == "!" && String::lastResult != "")
-            String::lastResult = pointer(String::lastResult,String::lastResult);
-        else
-            String::lastResult = pointer(one,two);
+        std::string o_1,o_2;
+        o_1 = (one == "!" && String::lastResult != "") ? String::lastResult : one;
+        o_2 = (two == "!" && String::lastResult != "") ? String::lastResult : two;
+        String::lastResult = pointer(o_1,o_2);
     }
     template <typename T>
     void resultUpdate(std::string (*pointer)(T,T,T), std::string one, std::string two,std::string three)
     {
-        if(one == "!" && String::lastResult != "")
-            String::lastResult = pointer(String::lastResult,two,three);
-        else if(two == "!" && String::lastResult != "")
-            String::lastResult = pointer(one,String::lastResult,three);
-        else if(three == "!" && String::lastResult != "")
-            String::lastResult = pointer(one,two,String::lastResult);
-        else if(two == "!" && one == "!" && String::lastResult != "")
-            String::lastResult = pointer(String::lastResult,String::lastResult,three);
-        else if(two == "!" && three == "!" && String::lastResult != "")
-            String::lastResult = pointer(one,String::lastResult,String::lastResult);
-        else if(one == "!" && three == "!" && String::lastResult != "")
-            String::lastResult = pointer(String::lastResult,two,String::lastResult);
-        else
-            String::lastResult = pointer(one,two,three);
+        std::string o_1,o_2,o_3;
+        o_1 = (one == "!" && String::lastResult != "") ? String::lastResult : one;
+        o_2 = (two == "!" && String::lastResult != "") ? String::lastResult : two;
+        o_3 = (three == "!" && String::lastResult != "") ? String::lastResult : three;
+        String::lastResult = pointer(o_1,o_2,o_3);
     }
     void command(std::string s,int type,int arguments = 1)
     {

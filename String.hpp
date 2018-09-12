@@ -46,9 +46,10 @@ namespace String
             return str;
         bool done = false;
         std::string newstr = str;
+        std::size_t found = -1;
         while(!done)
         {
-            std::size_t found = newstr.find(del);
+            found = newstr.find(del,found+1);
             if(found != std::string::npos)
                 newstr.replace(found, del.length(), rep);
             else
