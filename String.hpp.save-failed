@@ -291,50 +291,32 @@ namespace String
             str += std::string(std::to_string(*i) + " ");
         return str;
     }
-    bool smaller_than (const int& value) { return (value<10); }
-    std::string listPrime(const std::string start, const std::string str)
+    std::string listPrime(const std::string str)
     {
-        if(error_isdigit(str,ERROR_ARGUMENT2_TYPE) == "")
+        if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
             return "";
-        if(error_size(str,6,ERROR_ARGUMENT2_SIZE) == "")
-            return "";
-        if(error_isdigit(start,ERROR_ARGUMENT1_TYPE) == "")
-            return "";
-        if(error_size(start,6,ERROR_ARGUMENT1_SIZE) == "")
+        if(error_size(str,6,ERROR_ARGUMENT_SIZE) == "")
             return "";
         std::list<int> lis;
         int value = std::stoi(str);
-        int value2 = std::stoi(start);
-        value = value < 3 ? 3 : value;
-        value2 = value2 > value ? value - 1 : value2;
-        value2 = value2 < 2 ? 2 : value2;
         int greatestPosDivisor = std::sqrt(value);
+        Out::print(greatestPosDivisor,true);
         Out::print("Started pushing values...",true);
-        for(int i = 2; i < value; i++)
+        for(int i = 0; i < value; i++)
             lis.push_back(i);
         Out::print("Ended pushing values...",true);
+        if(lis.size() < 3)
+            return list_to_string(lis);
         Out::print("Started removing complex numbers",true);
-        for(auto i = lis.begin(); i != lis.end(); ++i)
+        for(auto i = lis.begin()+2; i != lis.end(); ++i)
         {
             int multiply = *i;
-            int constant = multiply;
-            bool done = false;
-            while(!done)
+            while(multiply <= value)
             {
-                multiply += constant;
-                if(multiply > value)
-                    done = true;
-                else
-                    lis.remove(multiply);
+                multiply += multiply;
+                lis.remove(multiply);
             }
         }
-        for(auto i = lis.begin(); i != lis.end(); ++i)
-        {
-            if(*i > value2)
-                break;
-            lis.remove(*i);
-        }
-        Out::print("Finished removing complex numbers",true);
         return list_to_string(lis);
     }
 }

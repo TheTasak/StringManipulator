@@ -82,7 +82,7 @@ int main()
         else if(!s.find("is_prime"))
             command(s,IS_PRIME);
         else if(!s.find("list_prime"))
-            command(s,LIST_PRIME);
+            command(s,LIST_PRIME,2);
         else
             print("That command doesn't exist. Try again!");
         print("",true);

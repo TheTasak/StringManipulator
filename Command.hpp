@@ -102,9 +102,6 @@ namespace Command
                  case IS_PRIME:
                     pointer = &String::is_prime;
                     break;
-                case LIST_PRIME:
-                    pointer = &String::listPrime;
-                    break;
                 case REVERSE:
                     pointer = &String::reverse;
                     break;
@@ -132,6 +129,9 @@ namespace Command
                     break;
                 case REMOVE:
                     pointer = &String::remove;
+                    break;
+                case LIST_PRIME:
+                    pointer = &String::listPrime;
                     break;
                 default:
                     break;

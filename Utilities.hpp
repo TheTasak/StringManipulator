@@ -23,11 +23,11 @@
 #define BIN_TO_DEC 5
 #define BIN_TO_HEX 6
 #define IS_PRIME 7
-#define LIST_PRIME 8
-#define REVERSE 9
+#define REVERSE 8
 
 #define REMOVE 0 // 2 argument
 #define MULTIPLY_CHAR 1
+#define LIST_PRIME 2
 
 #define REPLACE 0 // 3 argument
 
