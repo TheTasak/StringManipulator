@@ -38,7 +38,8 @@ namespace Command
         Out::print("divide(int) - divides accumulator by the number",true);
         Out::print("divide(int,int) - divides one number by another",true);
         Out::print("is_digit(string) - checks if all characters are numerical",true);
-        Out::print("is_prime(int) - checks if number is prime");
+        Out::print("is_prime(int) - checks if number is prime",true);
+        Out::print("list_prime(int,int) - list all prime numbers in range");
     }
     template <typename T>
     void resultUpdate(std::string (*pointer)(T), std::string one)
@@ -112,7 +113,7 @@ namespace Command
                 Out::print(String::lastResult);
             }
             else
-                Out::print("Values not specified");
+                Out::print(ERROR_NOTSPECIFIED);
         }
         else if(arguments == 2)
         {
@@ -140,7 +141,7 @@ namespace Command
                 Out::print(String::lastResult);
             }
             else
-                Out::print("Values not specified");
+                Out::print(ERROR_NOTSPECIFIED);
         }
         else if(arguments == 3)
         {
@@ -167,11 +168,11 @@ namespace Command
                     Out::print(String::lastResult);
                 }
                 else
-                    Out::print("Values not specified");
+                    Out::print(ERROR_NOTSPECIFIED);
             }
         }
         else
-            Out::print("Values not specified");
+            Out::print(ERROR_NOTSPECIFIED);
         }
     }
     void operationCommand(std::string s, int type)
@@ -185,25 +186,19 @@ namespace Command
             std::string a = s.substr(beginstr+1, comma - beginstr - 1);
             std::string b = s.substr(comma+1, endstr - comma - 1);
 
-            if(a == "!" && b != "!" && String::lastResult != "")
-                String::lastResult = String::basicOperation(String::lastResult, b, type);
-            else if(a != "!" && b == "!" && String::lastResult != "")
-                String::lastResult = String::basicOperation(a, String::lastResult,type);
-            else if(a == "!" && b == "!" && String::lastResult != "")
-                String::lastResult = String::basicOperation(String::lastResult, String::lastResult,type);
-            else
-                String::lastResult = String::basicOperation(a,b,type);
+            std::string first = (a == "!" && String::lastResult != "") ? String::lastResult : a;
+            std::string second = (b == "!" && String::lastResult != "") ? String::lastResult : b;
+            String::lastResult = String::basicOperation(first,second,type);
             Out::print(String::lastResult);
         }
         else if(beginstr != std::string::npos && endstr != std::string::npos)
         {
             std::string a = s.substr(beginstr+1, endstr - beginstr - 1);
-            if(a == "!" && String::lastResult != "")
-                String::basicOperation(String::lastResult,type);
-            else
-                String::basicOperation(a,type);
+
+            std::string first = (a == "!" && String::lastResult != "") ? String::lastResult : a;
+            String::basicOperation(first,type);
             Out::print(String::accumulator);
         }
         else
-            Out::print("Values not specified");
+            Out::print(ERROR_NOTSPECIFIED);
     }

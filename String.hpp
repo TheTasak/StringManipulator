@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <sstream>
 #include <list>
+#include <algorithm>
 #include <iostream>
 #include "windows.h"
 
@@ -291,7 +292,6 @@ namespace String
             str += std::string(std::to_string(*i) + " ");
         return str;
     }
-    bool smaller_than (const int& value) { return (value<10); }
     std::string listPrime(const std::string start, const std::string str)
     {
         if(error_isdigit(str,ERROR_ARGUMENT2_TYPE) == "")
@@ -305,16 +305,16 @@ namespace String
         std::list<int> lis;
         int value = std::stoi(str);
         int value2 = std::stoi(start);
-        value = value < 3 ? 3 : value;
+        value = value < 3 ? 3+1 : value+1;
         value2 = value2 > value ? value - 1 : value2;
         value2 = value2 < 2 ? 2 : value2;
-        int greatestPosDivisor = std::sqrt(value);
         Out::print("Started pushing values...",true);
         for(int i = 2; i < value; i++)
             lis.push_back(i);
-        Out::print("Ended pushing values...",true);
-        Out::print("Started removing complex numbers",true);
-        for(auto i = lis.begin(); i != lis.end(); ++i)
+        Out::print("Ended pushing values",true);
+        Out::print("Started removing complex numbers...",true);
+        auto lastDivisor = std::find(lis.begin(), lis.end(), std::sqrt(value));
+        for(auto i = lis.begin(); i != lastDivisor; ++i)
         {
             int multiply = *i;
             int constant = multiply;
@@ -334,7 +334,7 @@ namespace String
                 break;
             lis.remove(*i);
         }
-        Out::print("Finished removing complex numbers",true);
+        Out::print("Ended removing complex numbers",true);
         return list_to_string(lis);
     }
 }
