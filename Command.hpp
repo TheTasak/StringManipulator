@@ -31,6 +31,8 @@ namespace Command
         Out::print("clearacc - clears accumulator",true);
         Out::print("showlast - gets last result",true);
         Out::print("showacc - gets accumulator",true);
+        Out::print("showfile(filename) - shows contents of file",true);
+        Out::print("savefile(filename,string) - saves string to given file",true);
 
         Out::print("",true);
         Out::print("CHAR MANIPULATION",true);
