@@ -22,18 +22,19 @@
 	"windows.h"
 	"Utilities.hpp"
 
-1536598789 source:f:\progra\stringmanipulator\stringmanipulator\main.cpp
+1537111124 source:f:\progra\stringmanipulator\stringmanipulator\main.cpp
 	"Command.hpp"
 
-1536599127 f:\progra\stringmanipulator\stringmanipulator\command.hpp
+1537112121 f:\progra\stringmanipulator\stringmanipulator\command.hpp
 	"Utilities.hpp"
 	"String.hpp"
+	"File.hpp"
 
-1536598026 f:\progra\stringmanipulator\stringmanipulator\utilities.hpp
+1537111641 f:\progra\stringmanipulator\stringmanipulator\utilities.hpp
 	<iostream>
 	"windows.h"
 
-1536599883 f:\progra\stringmanipulator\stringmanipulator\string.hpp
+1537111124 f:\progra\stringmanipulator\stringmanipulator\string.hpp
 	<string>
 	<cmath>
 	<vector>
@@ -41,6 +42,7 @@
 	<iomanip>
 	<sstream>
 	<list>
+	<algorithm>
 	<iostream>
 	"windows.h"
 	"Utilities.hpp"
@@ -71,6 +73,11 @@
 	"Utilities.hpp"
 
 1537100623 c:\users\saturn\desktop\c++\stringmanipulator\file.hpp
+	"Utilities.hpp"
+	"String.hpp"
+	<fstream>
+
+1537111124 f:\progra\stringmanipulator\stringmanipulator\file.hpp
 	"Utilities.hpp"
 	"String.hpp"
 	<fstream>

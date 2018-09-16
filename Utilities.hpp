@@ -12,6 +12,11 @@
 #define ERROR_NOTSPECIFIED "Arguments not specified"
 #define ERROR_OPENFILE "File could not be opened"
 
+#define FLAG_BLANK 0
+#define FLAG_FILEIN 1
+#define FLAG_FILEOUT 2
+#define FLAG_FILEINOUT 3
+
 #define X_SIZE 112
 #define Y_SIZE 13
 #define SCREEN_SIZE 30

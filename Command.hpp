@@ -4,6 +4,25 @@
 #include "File.hpp"
 namespace Command
 {
+    int checkFlag(std::string input)
+    {
+        std::size_t par = input.find(")");
+        if(par != std::string::npos)
+        {
+            std::string s = input.substr(par+1);
+            String::remove(s,"");
+            if(s == "-fin")
+                return FLAG_FILEIN;
+            else if(s == "-fout")
+                return FLAG_FILEOUT;
+            else if(s == "-finout")
+                return FLAG_FILEINOUT;
+            else
+                return FLAG_BLANK;
+        }
+        else
+            return FLAG_BLANK;
+    }
     void commandShow()
     {
         Out::print("GENERAL",true);
@@ -111,6 +130,8 @@ namespace Command
                 default:
                     break;
                 }
+                if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
+                    first = File::getFileText(first);
                 resultUpdate(pointer,first);
                 Out::print(String::lastResult);
             }
@@ -139,6 +160,8 @@ namespace Command
                 default:
                     break;
                 }
+                if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
+                    first = File::getFileText(first);
                 resultUpdate(pointer,first,second);
                 Out::print(String::lastResult);
             }
@@ -166,6 +189,8 @@ namespace Command
                     default:
                         break;
                     }
+                    if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
+                        first = File::getFileText(first);
                     resultUpdate(pointer,first,second,third);
                     Out::print(String::lastResult);
                 }
