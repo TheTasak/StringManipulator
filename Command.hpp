@@ -127,6 +127,9 @@ namespace Command
                 case REVERSE:
                     pointer = &String::reverse;
                     break;
+                case FILE_GET:
+                    pointer = &File::getFileText;
+                    break;
                 default:
                     break;
                 }
@@ -156,6 +159,9 @@ namespace Command
                     break;
                 case LIST_PRIME:
                     pointer = &String::listPrime;
+                    break;
+                case FILE_SAVE:
+                    pointer = &File::setFileText;
                     break;
                 default:
                     break;

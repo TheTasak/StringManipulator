@@ -30,10 +30,12 @@
 #define BIN_TO_HEX 6
 #define IS_PRIME 7
 #define REVERSE 8
+#define FILE_GET 9
 
 #define REMOVE 0 // 2 argument
 #define MULTIPLY_CHAR 1
 #define LIST_PRIME 2
+#define FILE_SAVE 3
 
 #define REPLACE 0 // 3 argument
 

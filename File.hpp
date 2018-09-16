@@ -18,6 +18,7 @@ namespace File
             std::getline(file,buf);
             result += std::string(buf + "\n");
         }
+        result.erase(result.end()-1);
         file.close();
         return result;
     }
