@@ -1,7 +1,7 @@
 #pragma once
 #include "Utilities.hpp"
 #include "String.hpp"
-
+#include "File.hpp"
 namespace Command
 {
     void commandShow()
@@ -10,6 +10,8 @@ namespace Command
         Out::print("help - show help",true);
         Out::print("clear - clears screen",true);
         Out::print("clearacc - clears accumulator",true);
+        Out::print("showlast - gets last result",true);
+        Out::print("showacc - gets accumulator",true);
 
         Out::print("",true);
         Out::print("CHAR MANIPULATION",true);

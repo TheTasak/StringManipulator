@@ -47,6 +47,8 @@ int main()
             menu.clear();
         else if(s == "clearacc")
             String::accumulator = 0;
+        else if(s == "showlast")
+            Out::print(String::lastResult);
         else if(s == "showacc")
             Out::print(String::accumulator);
         else if(!s.find("multiplychar"))
@@ -83,6 +85,8 @@ int main()
             command(s,IS_PRIME);
         else if(!s.find("list_prime"))
             command(s,LIST_PRIME,2);
+        else if(!s.find("file"))
+            Out::print(File::setGetFileText("file.txt", "Hello world"));
         else
             print("That command doesn't exist. Try again!");
         print("",true);

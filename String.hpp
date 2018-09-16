@@ -120,39 +120,33 @@ namespace String
         std::string newstr = "";
         if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
             return "";
-        if(error_size(str,9,ERROR_ARGUMENT_SIZE) != "")
-        {
-            if(std::stoi(str) <= 255)
-                newstr = std::bitset<8>(std::stoi(str)).to_string();
-            else if(std::stoi(str) <= 65535)
-                newstr = std::bitset<16>(std::stoi(str)).to_string();
-            else
-                newstr = std::bitset<32>(std::stoi(str)).to_string();
-            return newstr;
-        }
-        else
+        if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
             return "";
+        if(std::stoi(str) <= 255)
+            newstr = std::bitset<8>(std::stoi(str)).to_string();
+        else if(std::stoi(str) <= 65535)
+            newstr = std::bitset<16>(std::stoi(str)).to_string();
+        else
+            newstr = std::bitset<32>(std::stoi(str)).to_string();
+        return newstr;
     }
     std::string to_hex(const std::string str)
     {
         std::stringstream sstream;
         if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
             return "";
-        if(error_size(str,9,ERROR_ARGUMENT_SIZE) != "")
-        {
-            int num = std::stoi(str);
-            int result;
-            sstream << num;
-            sstream >> std::hex >> result;
-            if(sstream.fail())
-            {
-                Out::print("Something went wrong...");
-                return "";
-            }
-            return std::to_string(result);
-        }
-        else
+        if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
             return "";
+        int num = std::stoi(str);
+        int result;
+        sstream << num;
+        sstream >> std::hex >> result;
+        if(sstream.fail())
+        {
+            Out::print("Something went wrong...");
+            return "";
+        }
+        return std::to_string(result);
     }
     std::string bin_to_dec(const std::string str)
     {
@@ -292,6 +286,7 @@ namespace String
             str += std::string(std::to_string(*i) + " ");
         return str;
     }
+
     std::string listPrime(const std::string start, const std::string str)
     {
         if(error_isdigit(str,ERROR_ARGUMENT2_TYPE) == "")
@@ -305,9 +300,9 @@ namespace String
         std::list<int> lis;
         int value = std::stoi(str);
         int value2 = std::stoi(start);
-        value = value < 3 ? 3+1 : value+1;
-        value2 = value2 > value ? value - 1 : value2;
         value2 = value2 < 2 ? 2 : value2;
+        if(value2 > value || value < 3)
+            return "";
         Out::print("Started pushing values...",true);
         for(int i = 2; i < value; i++)
             lis.push_back(i);
