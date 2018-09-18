@@ -79,16 +79,22 @@ int main()
             command(s,BIN_TO_HEX);
         else if(!s.find("add"))
             operationCommand(s,ADD);
-        else if(!s.find("subtract"))
+        else if(!s.find("sub"))
             operationCommand(s,SUBTRACT);
-        else if(!s.find("multiply"))
+        else if(!s.find("multi"))
             operationCommand(s,MULTIPLY);
-        else if(!s.find("divide"))
+        else if(!s.find("div"))
             operationCommand(s,DIVIDE);
         else if(!s.find("is_prime"))
             command(s,IS_PRIME);
         else if(!s.find("list_prime"))
             command(s,LIST_PRIME,2);
+        else if(!s.find("len"))
+            command(s,LEN);
+        else if(!s.find("hex_to_dec"))
+            command(s,HEX_TO_DEC);
+        else if(!s.find("hex_to_bin"))
+            command(s,HEX_TO_BIN);
         else
             print("That command doesn't exist. Try again!");
         print("",true);

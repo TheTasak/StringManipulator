@@ -31,6 +31,9 @@
 #define IS_PRIME 7
 #define REVERSE 8
 #define FILE_GET 9
+#define LEN 10
+#define HEX_TO_DEC 11
+#define HEX_TO_BIN 12
 
 #define REMOVE 0 // 2 argument
 #define MULTIPLY_CHAR 1

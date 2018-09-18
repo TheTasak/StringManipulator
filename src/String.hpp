@@ -18,7 +18,11 @@ namespace String
     std::string lastResult;
     long long accumulator = 0;
 
-    std::string reverse(const std::string str = "")
+    inline std::string length(const std::string str)
+    {
+        return std::to_string(str.length());
+    }
+    std::string reverse(const std::string str)
     {
         std::string new_str = "";
         for(int i = str.length() - 1; i >= 0; i--)
@@ -177,8 +181,29 @@ namespace String
     {
         std::string temp = bin_to_dec(str);
         if(temp == "") return "";
-        temp = to_hex(temp);
-        return temp;
+        return to_hex(temp);
+    }
+    std::string hex_to_dec(const std::string str)
+    {
+        if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
+            return "";
+        if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
+            return "";
+        std::stringstream sstream;
+        int i = std::stoi(str);
+        sstream << i;
+        sstream >> std::hex >> i;
+        return std::to_string(i);
+    }
+    std::string hex_to_bin(const std::string str)
+    {
+        if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
+            return "";
+        if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
+            return "";
+        std::string temp = hex_to_dec(str);
+        if(temp == "") return "";
+        return to_binary(temp);
     }
     std::string is_prime(const std::string str)
     {

@@ -1,0 +1,39 @@
+GENERAL
+help - show help
+clear - clears screen
+clearacc - clears accumulator
+showlast - gets last result
+showacc - gets accumulator
+showfile(filename) - shows contents of file
+savefile(filename,string) - saves string to given file
+len(string) - returns length of a string
+
+
+CHAR MANIPULATION
+multiplychar(string, int) - multiplies given string
+reverse(string) - reverses string
+remove(string, string) - removes second string from the first string
+replace(string, string, string) - replaces second string with third string in the first string
+to_upper(string) - changes characters to upper
+to_lower(string) - changes characters to lower
+
+
+NUMBER SYSTEMS
+to_bin(string) - changes characters to binary
+to_hex(string) - changes characters to hexadecimal
+bin_to_dec(string) - changes binary number to decimal
+bin_to_hex(string) - changes binary number to hexadecimal
+
+
+CALCULATOR
+add(int) - adds a number to accumulator
+add(int,int) - adds numbers to itselves
+sub(int) - subtracts the number from accumulator
+sub(int,int) - subtracts numbers from itselves
+multi(int) - multiplies the number by accumulator
+multi(int,int) - multiplies numbers
+div(int) - divides accumulator by the number
+div(int,int) - divides one number by another
+is_digit(string) - checks if all characters are numerical
+is_prime(int) - checks if number is prime
+list_prime(int,int) - list all prime numbers in range

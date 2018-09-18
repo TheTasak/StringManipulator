@@ -32,11 +32,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Command.hpp" />
-		<Unit filename="File.hpp" />
-		<Unit filename="String.hpp" />
-		<Unit filename="Utilities.hpp" />
-		<Unit filename="main.cpp" />
+		<Unit filename="src/Command.hpp" />
+		<Unit filename="src/File.hpp" />
+		<Unit filename="src/String.hpp" />
+		<Unit filename="src/Utilities.hpp" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
