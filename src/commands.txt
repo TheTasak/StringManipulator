@@ -7,6 +7,8 @@ showacc - gets accumulator
 showfile(filename) - shows contents of file
 savefile(filename,string) - saves string to given file
 len(string) - returns length of a string
+range(min, max, n) - returns every nth number in range min, max
+count(string,string) - returns number of occurences of second string in first string
 
 
 CHAR MANIPULATION
@@ -16,6 +18,8 @@ remove(string, string) - removes second string from the first string
 replace(string, string, string) - replaces second string with third string in the first string
 to_upper(string) - changes characters to upper
 to_lower(string) - changes characters to lower
+to_opposite(string) - changes characters to opposite
+add_char(string,string,n) - adds second string every nth char of first string
 
 
 NUMBER SYSTEMS
@@ -23,6 +27,8 @@ to_bin(string) - changes characters to binary
 to_hex(string) - changes characters to hexadecimal
 bin_to_dec(string) - changes binary number to decimal
 bin_to_hex(string) - changes binary number to hexadecimal
+hex_to_bin(string) - changes hexadecimal number to binary
+hex_to_dec(string) - changes hexadecimal number to decimal
 
 
 CALCULATOR
@@ -37,3 +43,5 @@ div(int,int) - divides one number by another
 is_digit(string) - checks if all characters are numerical
 is_prime(int) - checks if number is prime
 list_prime(int,int) - list all prime numbers in range
+root(int,n) - returns root with base n of number
+random(min,max) - returns random number in range of min,max

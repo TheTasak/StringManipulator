@@ -5,9 +5,11 @@
 
 #define ERROR_ARGUMENT1_TYPE "Argument no.1 is not a number"
 #define ERROR_ARGUMENT2_TYPE "Argument no.2 is not a number"
+#define ERROR_ARGUMENT3_TYPE "Argument no.3 is not a number"
 #define ERROR_ARGUMENT_TYPE "Input is not a number"
 #define ERROR_ARGUMENT1_SIZE "Argument no.1 is too big"
 #define ERROR_ARGUMENT2_SIZE "Argument no.2 is too big"
+#define ERROR_ARGUMENT3_SIZE "Argument no.3 is too big"
 #define ERROR_ARGUMENT_SIZE "Input is too big"
 #define ERROR_NOTSPECIFIED "Arguments not specified"
 #define ERROR_OPENFILE "File could not be opened"
@@ -34,13 +36,19 @@
 #define LEN 10
 #define HEX_TO_DEC 11
 #define HEX_TO_BIN 12
+#define TO_OPPOSITE 13
 
 #define REMOVE 0 // 2 argument
 #define MULTIPLY_CHAR 1
 #define LIST_PRIME 2
 #define FILE_SAVE 3
+#define COUNT 4
+#define ROOT 5
+#define RANDOM 6
 
 #define REPLACE 0 // 3 argument
+#define RANGE 1
+#define ADD_CHAR 2
 
 #define ADD 0
 #define SUBTRACT 1

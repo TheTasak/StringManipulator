@@ -105,6 +105,9 @@ namespace Command
                 case HEX_TO_BIN:
                     pointer = &String::hex_to_bin;
                     break;
+                case TO_OPPOSITE:
+                    pointer = &String::to_opposite;
+                    break;
                 default:
                     break;
                 }
@@ -138,6 +141,15 @@ namespace Command
                 case FILE_SAVE:
                     pointer = &File::setFileText;
                     break;
+                case COUNT:
+                    pointer = &String::count;
+                    break;
+                case ROOT:
+                    pointer = &String::root;
+                    break;
+                case RANDOM:
+                    pointer = &String::random;
+                    break;
                 default:
                     break;
                 }
@@ -166,6 +178,12 @@ namespace Command
                     {
                     case REPLACE:
                         pointer = &String::replace;
+                        break;
+                    case RANGE:
+                        pointer = &String::range;
+                        break;
+                    case ADD_CHAR:
+                        pointer = &String::addChar;
                         break;
                     default:
                         break;

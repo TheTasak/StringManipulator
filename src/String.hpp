@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <iostream>
 #include "windows.h"
+#include <ctime>
+#include <cstdlib>
 
 #include "Utilities.hpp"
 
@@ -108,15 +110,15 @@ namespace String
     std::string to_upper(const std::string str)
     {
         std::string newstr = str;
-        for(int i = 0; i < newstr.size(); i++)
-            newstr[i] = toupper(newstr[i]);
+        for(char &c : newstr)
+            c = toupper(c);
         return newstr;
     }
     std::string to_lower(const std::string str)
     {
         std::string newstr = str;
-        for(int i = 0; i < newstr.size(); i++)
-            newstr[i] = tolower(newstr[i]);
+        for(char &c : newstr)
+            c = tolower(c);
         return newstr;
     }
     std::string to_binary(const std::string str)
@@ -197,10 +199,6 @@ namespace String
     }
     std::string hex_to_bin(const std::string str)
     {
-        if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
-            return "";
-        if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
-            return "";
         std::string temp = hex_to_dec(str);
         if(temp == "") return "";
         return to_binary(temp);
@@ -323,38 +321,126 @@ namespace String
         if(error_size(start,6,ERROR_ARGUMENT1_SIZE) == "")
             return "";
         std::list<int> lis;
-        int value = std::stoi(str);
-        int value2 = std::stoi(start);
-        value2 = value2 < 2 ? 2 : value2;
-        if(value2 > value || value < 3)
+        int value = std::stoi(start);
+        int value2 = std::stoi(str);
+        value = value < 2 ? 2 : value;
+        if(value > value2 || value2 < 3)
             return "";
         Out::print("Started pushing values...",true);
-        for(int i = 2; i < value; i++)
+        for(int i = 2; i < value2; i++)
             lis.push_back(i);
         Out::print("Ended pushing values",true);
         Out::print("Started removing complex numbers...",true);
-        auto lastDivisor = std::find(lis.begin(), lis.end(), std::sqrt(value));
+        auto lastDivisor = std::find(lis.begin(), lis.end(), std::sqrt(value2));
         for(auto i = lis.begin(); i != lastDivisor; ++i)
         {
-            int multiply = *i;
-            int constant = multiply;
+            int multiply = *i,constant = *i;
             bool done = false;
             while(!done)
             {
                 multiply += constant;
-                if(multiply > value)
+                if(multiply > value2)
                     done = true;
                 else
                     lis.remove(multiply);
             }
         }
-        for(auto i = lis.begin(); i != lis.end(); ++i)
+        auto removeNumbers = [&](int number) -> bool
         {
-            if(*i > value2)
-                break;
-            lis.remove(*i);
-        }
+            return number < value;
+        };
+        auto it = std::remove_if(lis.begin(), lis.end(), removeNumbers);
+        lis.erase(it,lis.end());
         Out::print("Ended removing complex numbers",true);
         return list_to_string(lis);
+    }
+    std::string range(const std::string start, const std::string stop, const std::string i)
+    {
+        if(error_isdigit(start,ERROR_ARGUMENT1_TYPE) == "")
+            return "";
+        if(error_size(start,6,ERROR_ARGUMENT1_SIZE) == "")
+            return "";
+        if(error_isdigit(stop,ERROR_ARGUMENT2_TYPE) == "")
+            return "";
+        if(error_size(stop,6,ERROR_ARGUMENT2_SIZE) == "")
+            return "";
+        if(error_isdigit(i,ERROR_ARGUMENT3_TYPE) == "")
+            return "";
+        if(error_size(i,6,ERROR_ARGUMENT3_SIZE) == "")
+            return "";
+
+        int a = std::stoi(start), b = std::stoi(stop), in = std::stoi(i);
+        std::string str = "";
+        for(int i = a; i <= b; i += in)
+            str += std::string(std::to_string(i) + " ");
+        return str;
+    }
+    std::string count(const std::string s, const std::string fin)
+    {
+        bool done = false;
+        int i = 0;
+        std::size_t found = -fin.length();
+        while(!done)
+        {
+            found = s.find(fin,found+fin.length());
+            if(found != std::string::npos)
+                i++;
+            else
+                done = true;
+        }
+        return std::to_string(i);
+    }
+    std::string addChar(const std::string s, const std::string add, const std::string interval)
+    {
+        if(error_isdigit(interval,ERROR_ARGUMENT3_TYPE) == "")
+            return "";
+        if(error_size(interval,6,ERROR_ARGUMENT3_SIZE) == "")
+            return "";
+        int inter = std::stoi(interval);
+        std::string result = s;
+        for(int i = 0; i < result.length(); i += inter)
+        {
+            result.insert(i, add);
+            i += add.length();
+        }
+        return result;
+    }
+    std::string root(const std::string num, const std::string n)
+    {
+        if(error_isdigit(num,ERROR_ARGUMENT1_TYPE) == "")
+            return "";
+        if(error_size(num,6,ERROR_ARGUMENT1_SIZE) == "")
+            return "";
+        if(error_isdigit(n,ERROR_ARGUMENT2_TYPE) == "")
+            return "";
+        if(error_size(n,2,ERROR_ARGUMENT2_SIZE) == "")
+            return "";
+        int number = std::stoi(num),nt = std::stoi(n);
+        int nthroot = std::pow(number,nt);
+        return std::to_string(nthroot);
+    }
+    std::string random(const std::string start, const std::string en)
+    {
+        if(error_isdigit(start,ERROR_ARGUMENT1_TYPE) == "")
+            return "";
+        if(error_size(start,6,ERROR_ARGUMENT1_SIZE) == "")
+            return "";
+        if(error_isdigit(en,ERROR_ARGUMENT2_TYPE) == "")
+            return "";
+        if(error_size(en,6,ERROR_ARGUMENT2_SIZE) == "")
+            return "";
+        int a = std::stoi(start), b = std::stoi(en);
+        int output = a + (rand() % static_cast<int>(b - a + 1));
+        return std::to_string(output);
+    }
+    std::string to_opposite(const std::string s)
+    {
+        std::string newstr = s;
+        for(char &c : newstr)
+        {
+            if((int)c < 91) c = tolower(c);
+            else c = toupper(c);
+        }
+        return newstr;
     }
 }
