@@ -2,6 +2,18 @@
 
 #include <iostream>
 #include "windows.h"
+#include <string>
+#include <cmath>
+#include <vector>
+#include <bitset>
+#include <iomanip>
+#include <sstream>
+#include <list>
+#include <algorithm>
+#include <iostream>
+#include "windows.h"
+#include <ctime>
+#include <cstdlib>
 
 #define ERROR_ARGUMENT1_TYPE "Argument no.1 is not a number"
 #define ERROR_ARGUMENT2_TYPE "Argument no.2 is not a number"
@@ -23,37 +35,37 @@
 #define Y_SIZE 13
 #define SCREEN_SIZE 30
 
-#define LOWER 0 // 1 argument
-#define UPPER 1
-#define BINARY 2
-#define HEX 3
-#define IS_DIGIT 4
-#define BIN_TO_DEC 5
-#define BIN_TO_HEX 6
-#define IS_PRIME 7
-#define REVERSE 8
-#define FILE_GET 9
-#define LEN 10
-#define HEX_TO_DEC 11
-#define HEX_TO_BIN 12
-#define TO_OPPOSITE 13
+#define LOWER "to_lower" // 1 argument
+#define UPPER "to_upper"
+#define BINARY "to_binary"
+#define HEX "to_hex"
+#define IS_DIGIT "is_digit"
+#define BIN_TO_DEC "bin_to_dec"
+#define BIN_TO_HEX "bin_to_hex"
+#define IS_PRIME "is_prime"
+#define REVERSE "reverse"
+#define FILE_GET "showfile"
+#define LEN "len"
+#define HEX_TO_DEC "hex_to_dec"
+#define HEX_TO_BIN "hex_to_bin"
+#define TO_OPPOSITE "to_opposite"
 
-#define REMOVE 0 // 2 argument
-#define MULTIPLY_CHAR 1
-#define LIST_PRIME 2
-#define FILE_SAVE 3
-#define COUNT 4
-#define ROOT 5
-#define RANDOM 6
+#define REMOVE "remove" // 2 argument
+#define MULTIPLY_CHAR "multichar"
+#define LIST_PRIME "list_prime"
+#define FILE_SAVE "savefile"
+#define COUNT "count"
+#define ROOT "root"
+#define RANDOM "random"
 
-#define REPLACE 0 // 3 argument
-#define RANGE 1
-#define ADD_CHAR 2
+#define REPLACE "replace" // 3 argument
+#define RANGE "range"
+#define ADD_CHAR "add_char"
 
-#define ADD 0
-#define SUBTRACT 1
-#define MULTIPLY 2
-#define DIVIDE 3
+#define ADD "add"
+#define SUBTRACT "sub"
+#define MULTIPLY "multi"
+#define DIVIDE "div"
 
 namespace Out
 {

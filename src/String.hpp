@@ -1,18 +1,5 @@
 #pragma once
 
-#include <string>
-#include <cmath>
-#include <vector>
-#include <bitset>
-#include <iomanip>
-#include <sstream>
-#include <list>
-#include <algorithm>
-#include <iostream>
-#include "windows.h"
-#include <ctime>
-#include <cstdlib>
-
 #include "Utilities.hpp"
 
 namespace String
@@ -217,7 +204,7 @@ namespace String
         }
         return "True";
     }
-    void basicOperation(const std::string a, int operation)
+    void basicOperation(const std::string a, std::string operation)
     {
         bool isMinus = false;
         std::string atemp = a;
@@ -234,25 +221,12 @@ namespace String
         long long temp = std::stoll(atemp);
         temp = isMinus ? -temp : temp;
 		String::lastResult = std::to_string(temp);
-        switch(operation)
-        {
-        case ADD:
-            String::accumulator += temp;
-            break;
-        case SUBTRACT:
-            String::accumulator -= temp;
-            break;
-        case MULTIPLY:
-            String::accumulator *= temp;
-            break;
-        case DIVIDE:
-            if(temp != 0)
-                String::accumulator /= temp;
-            break;
-        }
-
+		if(operation == ADD) String::accumulator += temp;
+		else if(operation == SUBTRACT) String::accumulator -= temp;
+		else if(operation == MULTIPLY) String::accumulator *= temp;
+		else if(operation == DIVIDE) String::accumulator = (temp != 0) ? String::accumulator /= temp : String::accumulator;
     }
-    std::string basicOperation(const std::string a, const std::string b, int operation)
+    std::string basicOperation(const std::string a, const std::string b, std::string operation)
     {
         std::string atemp = a;
         std::string btemp = b;
@@ -281,25 +255,12 @@ namespace String
         temp2 = std::stoll(btemp);
         temp = isMinusA ? -temp : temp;
         temp2 = isMinusB ? -temp2 : temp2;
+
         long long result;
-        switch(operation)
-        {
-        case ADD:
-            result = temp + temp2;
-            break;
-        case SUBTRACT:
-            result = temp - temp2;
-            break;
-        case MULTIPLY:
-            result = temp * temp2;
-            break;
-        case DIVIDE:
-            if(temp2 != 0)
-                result = temp / temp2;
-            else
-                result = temp2;
-            break;
-        }
+        if(operation == ADD) result = temp + temp2;
+		else if(operation == SUBTRACT) result = temp - temp2;
+		else if(operation == MULTIPLY) result = temp * temp2;
+		else if(operation == DIVIDE) result = (temp2 != 0) ? temp / temp2 : temp2;
         return std::to_string(result);
     }
     std::string list_to_string(const std::list<int> vec)

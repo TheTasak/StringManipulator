@@ -53,7 +53,7 @@ namespace Command
         o_3 = (three == "!" && String::lastResult != "") ? String::lastResult : three;
         String::lastResult = pointer(o_1,o_2,o_3);
     }
-    void command(std::string s,int type,int arguments = 1)
+    void command(std::string s,std::string type,int arguments = 1)
     {
         std::size_t beginstr = s.find("(");
         std::size_t endstr = s.find(")");
@@ -64,53 +64,25 @@ namespace Command
             {
                 first = s.substr(beginstr+1, endstr - beginstr - 1);
                 std::string (*pointer)(std::string);
-                switch(type)
-                {
-                case UPPER:
-                    pointer = &String::to_upper;
-                    break;
-                case LOWER:
-                    pointer = &String::to_lower;
-                    break;
-                case BINARY:
-                    pointer = &String::to_binary;
-                    break;
-                case HEX:
-                    pointer = &String::to_hex;
-                    break;
-                case BIN_TO_DEC:
-                    pointer = &String::bin_to_dec;
-                    break;
-                case BIN_TO_HEX:
-                    pointer = &String::bin_to_hex;
-                    break;
-                case IS_DIGIT:
-                    pointer = &String::is_digit;
-                    break;
-                 case IS_PRIME:
-                    pointer = &String::is_prime;
-                    break;
-                case REVERSE:
-                    pointer = &String::reverse;
-                    break;
-                case FILE_GET:
-                    pointer = &File::getFileText;
-                    break;
-                case LEN:
-                    pointer = &String::length;
-                    break;
-                case HEX_TO_DEC:
-                    pointer = &String::hex_to_dec;
-                    break;
-                case HEX_TO_BIN:
-                    pointer = &String::hex_to_bin;
-                    break;
-                case TO_OPPOSITE:
-                    pointer = &String::to_opposite;
-                    break;
-                default:
-                    break;
-                }
+
+                if(type == UPPER) pointer = &String::to_upper;
+                else if(type == LOWER) pointer = &String::to_lower;
+                else if(type == BINARY) pointer = &String::to_binary;
+                else if(type == HEX) pointer = &String::to_hex;
+                else if(type == BIN_TO_DEC) pointer = &String::bin_to_dec;
+                else if(type == BIN_TO_HEX) pointer = &String::bin_to_hex;
+                else if(type == IS_DIGIT) pointer = &String::is_digit;
+                else if(type == IS_PRIME) pointer = &String::is_prime;
+                else if(type == REVERSE) pointer = &String::reverse;
+                else if(type == REVERSE) pointer = &String::reverse;
+                else if(type == REVERSE) pointer = &String::reverse;
+                else if(type == FILE_GET) pointer = &File::getFileText;
+                else if(type == LEN) pointer = &String::length;
+                else if(type == HEX_TO_DEC) pointer = &String::hex_to_dec;
+                else if(type == HEX_TO_BIN) pointer = &String::hex_to_bin;
+                else if(type == TO_OPPOSITE) pointer = &String::to_opposite;
+                else if(type == LEN) pointer = &String::length;
+
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
                 resultUpdate(pointer,first);
@@ -127,32 +99,15 @@ namespace Command
                 first = s.substr(beginstr+1, comma - beginstr - 1);
                 std::string second = s.substr(comma+1, endstr - comma - 1);
                 std::string (*pointer)(std::string,std::string);
-                switch(type)
-                {
-                case MULTIPLY_CHAR:
-                    pointer = &String::multiply;
-                    break;
-                case REMOVE:
-                    pointer = &String::remove;
-                    break;
-                case LIST_PRIME:
-                    pointer = &String::listPrime;
-                    break;
-                case FILE_SAVE:
-                    pointer = &File::setFileText;
-                    break;
-                case COUNT:
-                    pointer = &String::count;
-                    break;
-                case ROOT:
-                    pointer = &String::root;
-                    break;
-                case RANDOM:
-                    pointer = &String::random;
-                    break;
-                default:
-                    break;
-                }
+
+                if(type == MULTIPLY_CHAR) pointer = &String::multiply;
+                else if(type == REMOVE) pointer = &String::remove;
+                else if(type == LIST_PRIME) pointer = &String::listPrime;
+                else if(type == FILE_SAVE) pointer = &File::setFileText;
+                else if(type == COUNT) pointer = &String::count;
+                else if(type == ROOT) pointer = &String::root;
+                else if(type == RANDOM) pointer = &String::random;
+
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
                 resultUpdate(pointer,first,second);
@@ -174,20 +129,11 @@ namespace Command
                     first = s.substr(beginstr+1, comma - beginstr - 1);
                     second = s.substr(comma+1, comma_sec - comma - 1);
                     third = s.substr(comma_sec+1, endstr - comma_sec - 1);
-                    switch(type)
-                    {
-                    case REPLACE:
-                        pointer = &String::replace;
-                        break;
-                    case RANGE:
-                        pointer = &String::range;
-                        break;
-                    case ADD_CHAR:
-                        pointer = &String::addChar;
-                        break;
-                    default:
-                        break;
-                    }
+
+                    if(type == REPLACE) pointer = &String::replace;
+                    else if(type == RANGE) pointer = &String::range;
+                    else if(type == ADD_CHAR) pointer = &String::addChar;
+
                     if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                         first = File::getFileText(first);
                     resultUpdate(pointer,first,second,third);
@@ -200,8 +146,7 @@ namespace Command
         else
             Out::print(ERROR_NOTSPECIFIED);
         }
-    }
-    void operationCommand(std::string s, int type)
+    void operationCommand(std::string s, std::string type)
     {
         std::size_t beginstr = s.find("(");
         std::size_t comma = s.find(",");
@@ -228,3 +173,104 @@ namespace Command
         else
             Out::print(ERROR_NOTSPECIFIED);
     }
+    void checkCommand(std::string s)
+    {
+        std::size_t bracket = s.find("(");
+        std::string str = "";
+        if(bracket != std::string::npos)
+            str = s.substr(0,bracket);
+        else
+            str = s;
+        if(str == FILE_GET)
+            command(s,FILE_GET);
+        else if(str == ADD_CHAR)
+            command(s,ADD_CHAR,3);
+        else if(str == FILE_SAVE)
+            command(s,FILE_SAVE,2);
+        else if(str == MULTIPLY_CHAR)
+            command(s,MULTIPLY_CHAR,2);
+        else if(str == REVERSE)
+            command(s,REVERSE);
+        else if(str == REMOVE)
+            command(s,REMOVE,2);
+        else if(str == REPLACE)
+            command(s,REPLACE,3);
+        else if(str == UPPER)
+            command(s,UPPER);
+        else if(str == LOWER)
+            command(s,LOWER);
+        else if(str == BINARY)
+            command(s,BINARY);
+        else if(str == HEX)
+            command(s,HEX);
+        else if(str == IS_DIGIT)
+            command(s,IS_DIGIT);
+        else if(str == BIN_TO_DEC)
+            command(s,BIN_TO_DEC);
+        else if(str == BIN_TO_HEX)
+            command(s,BIN_TO_HEX);
+        else if(str == IS_PRIME)
+            command(s,IS_PRIME);
+        else if(str == LIST_PRIME)
+            command(s,LIST_PRIME,2);
+        else if(str == LEN)
+            command(s,LEN);
+        else if(str == HEX_TO_DEC)
+            command(s,HEX_TO_DEC);
+        else if(str == HEX_TO_BIN)
+            command(s,HEX_TO_BIN);
+        else if(str == RANGE)
+            command(s,RANGE,3);
+        else if(str == COUNT)
+            command(s,COUNT,2);
+        else if(str == ROOT)
+            command(s,ROOT,2);
+        else if(str == RANDOM)
+            command(s,RANDOM,2);
+        else if(str == TO_OPPOSITE)
+            command(s,TO_OPPOSITE);
+        else if(str == ADD)
+            operationCommand(s,ADD);
+        else if(str == SUBTRACT)
+            operationCommand(s,SUBTRACT);
+        else if(str == MULTIPLY)
+            operationCommand(s,MULTIPLY);
+        else if(str == DIVIDE)
+            operationCommand(s,DIVIDE);
+        else if(str == "help")
+            commandShow();
+        else if(str == "clearacc")
+            String::accumulator = 0;
+        else if(str == "showlast")
+            Out::print(String::lastResult);
+        else if(str == "showacc")
+            Out::print(String::accumulator);
+        else
+            Out::print("That command doesn't exist. Try again!");
+    }
+}
+class Menu
+{
+    std::vector<std::string> vec;
+    void init()
+    {
+        vec.push_back(std::string(" " + String::multiply("_", std::to_string(X_SIZE)) + " "));
+        for(int i = 0; i < Y_SIZE; i++)
+            vec.push_back(std::string("|" + String::multiply(" ", std::to_string(X_SIZE)) + "|"));
+        vec.push_back(std::string("|" + String::multiply("_", std::to_string(X_SIZE)) + "|"));
+    }
+public:
+    Menu()
+    {
+        init();
+    }
+    void show()
+    {
+        Out::print("",true);
+        Out::print(" >");
+    }
+	void clear()
+	{
+		Out::print(String::multiply("\n", std::to_string(SCREEN_SIZE)));
+	}
+};
