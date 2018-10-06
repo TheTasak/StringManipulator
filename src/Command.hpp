@@ -81,7 +81,6 @@ namespace Command
                 else if(type == HEX_TO_DEC) pointer = &String::hex_to_dec;
                 else if(type == HEX_TO_BIN) pointer = &String::hex_to_bin;
                 else if(type == TO_OPPOSITE) pointer = &String::to_opposite;
-                else if(type == LEN) pointer = &String::length;
 
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
@@ -107,6 +106,7 @@ namespace Command
                 else if(type == COUNT) pointer = &String::count;
                 else if(type == ROOT) pointer = &String::root;
                 else if(type == RANDOM) pointer = &String::random;
+                else if(type == BASIC_ACC_OPERATION) pointer = &String::basicAccOperation;
 
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
@@ -133,6 +133,7 @@ namespace Command
                     if(type == REPLACE) pointer = &String::replace;
                     else if(type == RANGE) pointer = &String::range;
                     else if(type == ADD_CHAR) pointer = &String::addChar;
+                    else if(type == BASIC_OPERATION) pointer = &String::basicOperation;
 
                     if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                         first = File::getFileText(first);
@@ -142,33 +143,6 @@ namespace Command
                 else
                     Out::print(ERROR_NOTSPECIFIED);
             }
-        }
-        else
-            Out::print(ERROR_NOTSPECIFIED);
-        }
-    void operationCommand(std::string s, std::string type)
-    {
-        std::size_t beginstr = s.find("(");
-        std::size_t comma = s.find(",");
-        std::size_t endstr = s.find(")");
-        std::string str, removal;
-        if(comma != std::string::npos && beginstr != std::string::npos && endstr != std::string::npos)
-        {
-            std::string a = s.substr(beginstr+1, comma - beginstr - 1);
-            std::string b = s.substr(comma+1, endstr - comma - 1);
-
-            std::string first = (a == "!" && String::lastResult != "") ? String::lastResult : a;
-            std::string second = (b == "!" && String::lastResult != "") ? String::lastResult : b;
-            String::lastResult = String::basicOperation(first,second,type);
-            Out::print(String::lastResult);
-        }
-        else if(beginstr != std::string::npos && endstr != std::string::npos)
-        {
-            std::string a = s.substr(beginstr+1, endstr - beginstr - 1);
-
-            std::string first = (a == "!" && String::lastResult != "") ? String::lastResult : a;
-            String::basicOperation(first,type);
-            Out::print(String::accumulator);
         }
         else
             Out::print(ERROR_NOTSPECIFIED);
@@ -229,14 +203,10 @@ namespace Command
             command(s,RANDOM,2);
         else if(str == TO_OPPOSITE)
             command(s,TO_OPPOSITE);
-        else if(str == ADD)
-            operationCommand(s,ADD);
-        else if(str == SUBTRACT)
-            operationCommand(s,SUBTRACT);
-        else if(str == MULTIPLY)
-            operationCommand(s,MULTIPLY);
-        else if(str == DIVIDE)
-            operationCommand(s,DIVIDE);
+        else if(str == BASIC_OPERATION)
+            command(s,BASIC_OPERATION,3);
+        else if(str == BASIC_ACC_OPERATION)
+            command(s,BASIC_ACC_OPERATION,2);
         else if(str == "help")
             commandShow();
         else if(str == "clearacc")
@@ -245,6 +215,8 @@ namespace Command
             Out::print(String::lastResult);
         else if(str == "showacc")
             Out::print(String::accumulator);
+        else if(str == "clearlast")
+            String::lastResult = "";
         else
             Out::print("That command doesn't exist. Try again!");
     }

@@ -57,15 +57,12 @@
 #define COUNT "count"
 #define ROOT "root"
 #define RANDOM "random"
+#define BASIC_OPERATION "operation"
 
 #define REPLACE "replace" // 3 argument
 #define RANGE "range"
 #define ADD_CHAR "add_char"
-
-#define ADD "add"
-#define SUBTRACT "sub"
-#define MULTIPLY "multi"
-#define DIVIDE "div"
+#define BASIC_ACC_OPERATION "accoperation"
 
 namespace Out
 {

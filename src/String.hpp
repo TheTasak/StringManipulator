@@ -204,7 +204,7 @@ namespace String
         }
         return "True";
     }
-    void basicOperation(const std::string a, std::string operation)
+    std::string basicAccOperation(const std::string a, const std::string operation)
     {
         bool isMinus = false;
         std::string atemp = a;
@@ -214,19 +214,21 @@ namespace String
             atemp.erase(atemp.begin());
         }
         if(error_isdigit(atemp,ERROR_ARGUMENT_TYPE) == "")
-            return;
+            return "";
         if(error_size(atemp,9,ERROR_ARGUMENT_SIZE) == "")
-            return;
+            return "";
 
         long long temp = std::stoll(atemp);
         temp = isMinus ? -temp : temp;
 		String::lastResult = std::to_string(temp);
-		if(operation == ADD) String::accumulator += temp;
-		else if(operation == SUBTRACT) String::accumulator -= temp;
-		else if(operation == MULTIPLY) String::accumulator *= temp;
-		else if(operation == DIVIDE) String::accumulator = (temp != 0) ? String::accumulator /= temp : String::accumulator;
+		if(operation == "+") String::accumulator += temp;
+		else if(operation == "-") String::accumulator -= temp;
+		else if(operation == "*") String::accumulator *= temp;
+		else if(operation == "/") String::accumulator = (temp != 0) ? String::accumulator /= temp : String::accumulator;
+		else Out::print("Incorrect operation",true);
+		return std::to_string(String::accumulator);
     }
-    std::string basicOperation(const std::string a, const std::string b, std::string operation)
+    std::string basicOperation(const std::string a, const std::string b, const std::string operation)
     {
         std::string atemp = a;
         std::string btemp = b;
@@ -257,10 +259,11 @@ namespace String
         temp2 = isMinusB ? -temp2 : temp2;
 
         long long result;
-        if(operation == ADD) result = temp + temp2;
-		else if(operation == SUBTRACT) result = temp - temp2;
-		else if(operation == MULTIPLY) result = temp * temp2;
-		else if(operation == DIVIDE) result = (temp2 != 0) ? temp / temp2 : temp2;
+        if(operation == "+") result = temp + temp2;
+		else if(operation == "-") result = temp - temp2;
+		else if(operation == "*") result = temp * temp2;
+		else if(operation == "/") result = (temp2 != 0) ? temp / temp2 : temp2;
+		else Out::print("Incorrect operation",true);
         return std::to_string(result);
     }
     std::string list_to_string(const std::list<int> vec)
