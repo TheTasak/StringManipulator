@@ -4,24 +4,40 @@
 #include "File.hpp"
 namespace Command
 {
-    int checkFlag(std::string input)
+    std::string checkFlag(std::string input)
     {
         std::size_t par = input.find(")");
         if(par != std::string::npos)
         {
             std::string s = input.substr(par+1);
-            String::remove(s,"");
-            if(s == "-fin")
-                return FLAG_FILEIN;
-            else if(s == "-fout")
-                return FLAG_FILEOUT;
-            else if(s == "-finout")
+            std::string flag = s;
+            std::size_t found;
+            found = s.find(FLAG_FILEINOUT);
+            if(found != std::string::npos)
                 return FLAG_FILEINOUT;
+            found = s.find(FLAG_FILEOUT);
+            if(found != std::string::npos)
+                return FLAG_FILEOUT;
+            found = s.find(FLAG_FILEIN);
+            if(found != std::string::npos)
+                return FLAG_FILEIN;
             else
                 return FLAG_BLANK;
         }
         else
             return FLAG_BLANK;
+    }
+    std::string getFileName(std::string input)
+    {
+        std::size_t found = input.find("?");
+        if(found == std::string::npos)
+            return "";
+        std::string s = input.substr(found+1);
+        found = s.find("?");
+        if(found == std::string::npos)
+            return "";
+        s.erase(found);
+        return s;
     }
     void commandShow()
     {
@@ -85,6 +101,11 @@ namespace Command
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
                 resultUpdate(pointer,first);
+                if(checkFlag(s) == FLAG_FILEOUT || checkFlag(s) == FLAG_FILEINOUT)
+                {
+                    std::string filename = getFileName(s);
+                    if(!filename.empty()) File::setFileText(filename,String::lastResult);
+                }
                 Out::print(String::lastResult);
             }
             else
@@ -111,6 +132,11 @@ namespace Command
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
                 resultUpdate(pointer,first,second);
+                if(checkFlag(s) == FLAG_FILEOUT || checkFlag(s) == FLAG_FILEINOUT)
+                {
+                    std::string filename = getFileName(s);
+                    if(!filename.empty()) File::setFileText(filename,String::lastResult);
+                }
                 Out::print(String::lastResult);
             }
             else
@@ -138,6 +164,11 @@ namespace Command
                     if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                         first = File::getFileText(first);
                     resultUpdate(pointer,first,second,third);
+                    if(checkFlag(s) == FLAG_FILEOUT || checkFlag(s) == FLAG_FILEINOUT)
+                    {
+                        std::string filename = getFileName(s);
+                        if(!filename.empty()) File::setFileText(filename,String::lastResult);
+                    }
                     Out::print(String::lastResult);
                 }
                 else

@@ -2,6 +2,7 @@ GENERAL
 help - show help
 clear - clears screen
 clearacc - clears accumulator
+clearlast - clear last result
 showlast - gets last result
 showacc - gets accumulator
 showfile(filename) - shows contents of file
@@ -32,14 +33,8 @@ hex_to_dec(string) - changes hexadecimal number to decimal
 
 
 CALCULATOR
-add(int) - adds a number to accumulator
-add(int,int) - adds numbers to itselves
-sub(int) - subtracts the number from accumulator
-sub(int,int) - subtracts numbers from itselves
-multi(int) - multiplies the number by accumulator
-multi(int,int) - multiplies numbers
-div(int) - divides accumulator by the number
-div(int,int) - divides one number by another
+operation(int,int,char) - operates on two numbers with char(+,-,*,/)
+accoperation(int,char) - operates on accumulator and given number with char(+,-,*,/)
 is_digit(string) - checks if all characters are numerical
 is_prime(int) - checks if number is prime
 list_prime(int,int) - list all prime numbers in range

@@ -26,10 +26,10 @@
 #define ERROR_NOTSPECIFIED "Arguments not specified"
 #define ERROR_OPENFILE "File could not be opened"
 
-#define FLAG_BLANK 0
-#define FLAG_FILEIN 1
-#define FLAG_FILEOUT 2
-#define FLAG_FILEINOUT 3
+#define FLAG_BLANK ""
+#define FLAG_FILEIN "-fin"
+#define FLAG_FILEOUT "-fout"
+#define FLAG_FILEINOUT "-finout"
 
 #define X_SIZE 112
 #define Y_SIZE 13
@@ -63,6 +63,9 @@
 #define RANGE "range"
 #define ADD_CHAR "add_char"
 #define BASIC_ACC_OPERATION "accoperation"
+
+
+#define COMMAND_FILEPATH "src\\commands.txt"
 
 namespace Out
 {

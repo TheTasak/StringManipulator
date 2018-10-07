@@ -82,15 +82,15 @@
 	"String.hpp"
 	<fstream>
 
-1538771203 source:c:\users\saturn\desktop\c++\stringmanipulator\src\main.cpp
+1538912364 source:c:\users\saturn\desktop\c++\stringmanipulator\src\main.cpp
 	"Command.hpp"
 
-1538830492 c:\users\saturn\desktop\c++\stringmanipulator\src\command.hpp
+1538914540 c:\users\saturn\desktop\c++\stringmanipulator\src\command.hpp
 	"Utilities.hpp"
 	"String.hpp"
 	"File.hpp"
 
-1538830202 c:\users\saturn\desktop\c++\stringmanipulator\src\utilities.hpp
+1538913531 c:\users\saturn\desktop\c++\stringmanipulator\src\utilities.hpp
 	<iostream>
 	"windows.h"
 	<string>
