@@ -32,6 +32,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="src/Application.hpp" />
 		<Unit filename="src/Command.hpp" />
 		<Unit filename="src/File.hpp" />
 		<Unit filename="src/String.hpp" />
