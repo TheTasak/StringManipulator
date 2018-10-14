@@ -60,6 +60,12 @@ namespace String
         }
         return "True";
     }
+    std::string is_number(const std::string str)
+    {
+        if(is_digit(str) == "True" && str[0] != '0')
+            return "True";
+        return "False";
+    }
     std::string error_size(std::string s, int i, std::string error)
     {
         if(s.length() >= i)
@@ -69,9 +75,9 @@ namespace String
         }
         return "a";
     }
-    std::string error_isdigit(std::string s, std::string error)
+    std::string error_isnumber(std::string s, std::string error)
     {
-        if(String::is_digit(s) == "False")
+        if(String::is_number(s) == "False")
         {
             Out::print(error);
             return "";
@@ -80,7 +86,7 @@ namespace String
     }
     std::string multiply(const std::string str, const std::string i)
     {
-        if(error_isdigit(i,ERROR_ARGUMENT2_TYPE) == "")
+        if(error_isnumber(i,ERROR_ARGUMENT2_TYPE) == "")
             return "";
         if(error_size(i,9,ERROR_ARGUMENT2_SIZE) == "")
             return "";
@@ -111,7 +117,7 @@ namespace String
     std::string to_binary(const std::string str)
     {
         std::string newstr = "";
-        if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
+        if(error_isnumber(str,ERROR_ARGUMENT_TYPE) == "")
             return "";
         if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
             return "";
@@ -126,7 +132,7 @@ namespace String
     std::string to_hex(const std::string str)
     {
         std::stringstream sstream;
-        if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
+        if(error_isnumber(str,ERROR_ARGUMENT_TYPE) == "")
             return "";
         if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
             return "";
@@ -174,7 +180,7 @@ namespace String
     }
     std::string hex_to_dec(const std::string str)
     {
-        if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
+        if(error_isnumber(str,ERROR_ARGUMENT_TYPE) == "")
             return "";
         if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
             return "";
@@ -192,7 +198,7 @@ namespace String
     }
     std::string is_prime(const std::string str)
     {
-        if(error_isdigit(str,ERROR_ARGUMENT_TYPE) == "")
+        if(error_isnumber(str,ERROR_ARGUMENT_TYPE) == "")
             return "";
         if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
             return "";
@@ -213,7 +219,7 @@ namespace String
             isMinus = true;
             atemp.erase(atemp.begin());
         }
-        if(error_isdigit(atemp,ERROR_ARGUMENT_TYPE) == "")
+        if(error_isnumber(atemp,ERROR_ARGUMENT_TYPE) == "")
             return "";
         if(error_size(atemp,9,ERROR_ARGUMENT_SIZE) == "")
             return "";
@@ -243,9 +249,9 @@ namespace String
             isMinusB = true;
             btemp.erase(btemp.begin());
         }
-        if(error_isdigit(atemp,ERROR_ARGUMENT1_TYPE) == "")
+        if(error_isnumber(atemp,ERROR_ARGUMENT1_TYPE) == "")
             return "";
-        if(error_isdigit(btemp,ERROR_ARGUMENT2_TYPE) == "")
+        if(error_isnumber(btemp,ERROR_ARGUMENT2_TYPE) == "")
             return "";
         if(error_size(atemp,9,ERROR_ARGUMENT1_SIZE) == "")
             return "";
@@ -276,11 +282,11 @@ namespace String
 
     std::string listPrime(const std::string start, const std::string str)
     {
-        if(error_isdigit(str,ERROR_ARGUMENT2_TYPE) == "")
+        if(error_isnumber(str,ERROR_ARGUMENT2_TYPE) == "")
             return "";
         if(error_size(str,6,ERROR_ARGUMENT2_SIZE) == "")
             return "";
-        if(error_isdigit(start,ERROR_ARGUMENT1_TYPE) == "")
+        if(error_isnumber(start,ERROR_ARGUMENT1_TYPE) == "")
             return "";
         if(error_size(start,6,ERROR_ARGUMENT1_SIZE) == "")
             return "";
@@ -320,15 +326,15 @@ namespace String
     }
     std::string range(const std::string start, const std::string stop, const std::string i)
     {
-        if(error_isdigit(start,ERROR_ARGUMENT1_TYPE) == "")
+        if(error_isnumber(start,ERROR_ARGUMENT1_TYPE) == "")
             return "";
         if(error_size(start,6,ERROR_ARGUMENT1_SIZE) == "")
             return "";
-        if(error_isdigit(stop,ERROR_ARGUMENT2_TYPE) == "")
+        if(error_isnumber(stop,ERROR_ARGUMENT2_TYPE) == "")
             return "";
         if(error_size(stop,6,ERROR_ARGUMENT2_SIZE) == "")
             return "";
-        if(error_isdigit(i,ERROR_ARGUMENT3_TYPE) == "")
+        if(error_isnumber(i,ERROR_ARGUMENT3_TYPE) == "")
             return "";
         if(error_size(i,6,ERROR_ARGUMENT3_SIZE) == "")
             return "";
@@ -356,7 +362,7 @@ namespace String
     }
     std::string addChar(const std::string s, const std::string add, const std::string interval)
     {
-        if(error_isdigit(interval,ERROR_ARGUMENT3_TYPE) == "")
+        if(error_isnumber(interval,ERROR_ARGUMENT3_TYPE) == "")
             return "";
         if(error_size(interval,6,ERROR_ARGUMENT3_SIZE) == "")
             return "";
@@ -371,25 +377,31 @@ namespace String
     }
     std::string root(const std::string num, const std::string n)
     {
-        if(error_isdigit(num,ERROR_ARGUMENT1_TYPE) == "")
+        if(error_isnumber(num,ERROR_ARGUMENT1_TYPE) == "")
             return "";
         if(error_size(num,6,ERROR_ARGUMENT1_SIZE) == "")
             return "";
-        if(error_isdigit(n,ERROR_ARGUMENT2_TYPE) == "")
+        if(error_isnumber(n,ERROR_ARGUMENT2_TYPE) == "")
             return "";
-        if(error_size(n,2,ERROR_ARGUMENT2_SIZE) == "")
+        if(error_size(n,3,ERROR_ARGUMENT2_SIZE) == "")
             return "";
         int number = std::stoi(num),nt = std::stoi(n);
-        int nthroot = std::pow(number,nt);
-        return std::to_string(nthroot);
+        float nthroot = std::pow(number,nt);
+        int in = (int)std::floor(nthroot);
+        if(in == -2147483648)
+        {
+            Out::print(ERROR_ARGUMENT_SIZE);
+            return "";
+        }
+        return std::to_string(in);
     }
     std::string random(const std::string start, const std::string en)
     {
-        if(error_isdigit(start,ERROR_ARGUMENT1_TYPE) == "")
+        if(error_isnumber(start,ERROR_ARGUMENT1_TYPE) == "")
             return "";
         if(error_size(start,6,ERROR_ARGUMENT1_SIZE) == "")
             return "";
-        if(error_isdigit(en,ERROR_ARGUMENT2_TYPE) == "")
+        if(error_isnumber(en,ERROR_ARGUMENT2_TYPE) == "")
             return "";
         if(error_size(en,6,ERROR_ARGUMENT2_SIZE) == "")
             return "";

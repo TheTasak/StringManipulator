@@ -25,6 +25,8 @@
 #define ERROR_ARGUMENT_SIZE "Input is too big"
 #define ERROR_NOTSPECIFIED "Arguments not specified"
 #define ERROR_OPENFILE "File could not be opened"
+#define ERROR_WRONGINPUT "Input is not correct. Try again"
+#define ERROR_COMMAND_NOT_DEFINED "That command doesn't exist. Try again!"
 
 #define FLAG_BLANK ""
 #define FLAG_FILEIN "-fin"
@@ -34,6 +36,14 @@
 #define X_SIZE 112
 #define Y_SIZE 13
 #define SCREEN_SIZE 30
+
+#define HELP "help" // 0 argument
+#define CLEAR_ACC "clearacc"
+#define CLEAR_LAST "clearlast"
+#define CLEAR "clear"
+#define QUIT "quit"
+#define SHOW_ACC "showacc"
+#define SHOW_LAST "showlast"
 
 #define LOWER "to_lower" // 1 argument
 #define UPPER "to_upper"
@@ -66,6 +76,7 @@
 
 
 #define COMMAND_FILEPATH "src\\commands.txt"
+#define WELCOME_TEXT "Welcome to StringManipulation. Type help to see list of commands"
 
 namespace Out
 {
