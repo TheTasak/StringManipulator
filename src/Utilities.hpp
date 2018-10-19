@@ -47,18 +47,15 @@
 
 #define LOWER "to_lower" // 1 argument
 #define UPPER "to_upper"
-#define BINARY "to_binary"
-#define HEX "to_hex"
 #define IS_DIGIT "is_digit"
-#define BIN_TO_DEC "bin_to_dec"
-#define BIN_TO_HEX "bin_to_hex"
 #define IS_PRIME "is_prime"
 #define REVERSE "reverse"
 #define FILE_GET "showfile"
 #define LEN "len"
-#define HEX_TO_DEC "hex_to_dec"
-#define HEX_TO_BIN "hex_to_bin"
 #define TO_OPPOSITE "to_opposite"
+#define FACTORIAL "fac"
+#define PASSWORD_GEN "passgen"
+#define TEXT_GEN "textgen"
 
 #define REMOVE "remove" // 2 argument
 #define MULTIPLY_CHAR "multichar"
@@ -73,11 +70,18 @@
 #define RANGE "range"
 #define ADD_CHAR "add_char"
 #define BASIC_ACC_OPERATION "accoperation"
+#define TO_BASE "to_base"
 
 
 #define COMMAND_FILEPATH "src\\commands.txt"
 #define WELCOME_TEXT "Welcome to StringManipulation. Type help to see list of commands"
+#define MIN_BASE 2
+#define MAX_BASE 10
 
+#define MAX_WORD 12
+#define MIN_WORD 3
+#define MAX_SENTENCE 12
+#define MIN_SENTENCE 2
 namespace Out
 {
 	template<typename T>

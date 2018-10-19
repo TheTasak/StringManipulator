@@ -39,6 +39,15 @@ namespace Command
         s.erase(found);
         return s;
     }
+    void saveToFile(std::string s)
+    {
+        if(checkFlag(s) == FLAG_FILEOUT || checkFlag(s) == FLAG_FILEINOUT)
+        {
+            std::string filename = getFileName(s);
+            if(!filename.empty())
+                File::setFileText(filename,String::lastResult);
+        }
+    }
     void commandShow()
     {
         std::string file = File::getFileText(COMMAND_FILEPATH);
@@ -81,10 +90,6 @@ namespace Command
 
                 if(type == UPPER)               pointer = &String::to_upper;
                 else if(type == LOWER)          pointer = &String::to_lower;
-                else if(type == BINARY)         pointer = &String::to_binary;
-                else if(type == HEX)            pointer = &String::to_hex;
-                else if(type == BIN_TO_DEC)     pointer = &String::bin_to_dec;
-                else if(type == BIN_TO_HEX)     pointer = &String::bin_to_hex;
                 else if(type == IS_DIGIT)       pointer = &String::is_digit;
                 else if(type == IS_PRIME)       pointer = &String::is_prime;
                 else if(type == REVERSE)        pointer = &String::reverse;
@@ -92,18 +97,15 @@ namespace Command
                 else if(type == REVERSE)        pointer = &String::reverse;
                 else if(type == FILE_GET)       pointer = &File::getFileText;
                 else if(type == LEN)            pointer = &String::length;
-                else if(type == HEX_TO_DEC)     pointer = &String::hex_to_dec;
-                else if(type == HEX_TO_BIN)     pointer = &String::hex_to_bin;
                 else if(type == TO_OPPOSITE)    pointer = &String::to_opposite;
+                else if(type == FACTORIAL)      pointer = &String::factorial;
+                else if(type == PASSWORD_GEN)   pointer = &String::passwordGen;
+                else if(type == TEXT_GEN)       pointer = &String::textGen;
 
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
                 resultUpdate(pointer,first);
-                if(checkFlag(s) == FLAG_FILEOUT || checkFlag(s) == FLAG_FILEINOUT)
-                {
-                    std::string filename = getFileName(s);
-                    if(!filename.empty()) File::setFileText(filename,String::lastResult);
-                }
+                saveToFile(s);
                 Out::print(String::lastResult);
             }
             else
@@ -130,11 +132,7 @@ namespace Command
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
                 resultUpdate(pointer,first,second);
-                if(checkFlag(s) == FLAG_FILEOUT || checkFlag(s) == FLAG_FILEINOUT)
-                {
-                    std::string filename = getFileName(s);
-                    if(!filename.empty()) File::setFileText(filename,String::lastResult);
-                }
+                saveToFile(s);
                 Out::print(String::lastResult);
             }
             else
@@ -158,15 +156,12 @@ namespace Command
                     else if(type == RANGE)              pointer = &String::range;
                     else if(type == ADD_CHAR)           pointer = &String::addChar;
                     else if(type == BASIC_OPERATION)    pointer = &String::basicOperation;
+                    else if(type == TO_BASE)            pointer = &String::toBase;
 
                     if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                         first = File::getFileText(first);
                     resultUpdate(pointer,first,second,third);
-                    if(checkFlag(s) == FLAG_FILEOUT || checkFlag(s) == FLAG_FILEINOUT)
-                    {
-                        std::string filename = getFileName(s);
-                        if(!filename.empty()) File::setFileText(filename,String::lastResult);
-                    }
+                    saveToFile(s);
                     Out::print(String::lastResult);
                 }
                 else

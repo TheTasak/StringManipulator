@@ -24,9 +24,9 @@ class Application
     }
     bool checkInput()
     {
-        if(!std::getline(std::cin,globalInput)) 
+        if(!std::getline(std::cin,globalInput))
 			return false;
-        else 
+        else
 			return true;
     }
     void clear()
@@ -70,16 +70,10 @@ public:
         else if(str == REPLACE)             command(s,REPLACE,3);
         else if(str == UPPER)               command(s,UPPER);
         else if(str == LOWER)               command(s,LOWER);
-        else if(str == BINARY)              command(s,BINARY);
-        else if(str == HEX)                 command(s,HEX);
         else if(str == IS_DIGIT)            command(s,IS_DIGIT);
-        else if(str == BIN_TO_DEC)          command(s,BIN_TO_DEC);
-        else if(str == BIN_TO_HEX)          command(s,BIN_TO_HEX);
         else if(str == IS_PRIME)            command(s,IS_PRIME);
         else if(str == LIST_PRIME)          command(s,LIST_PRIME,2);
         else if(str == LEN)                 command(s,LEN);
-        else if(str == HEX_TO_DEC)          command(s,HEX_TO_DEC);
-        else if(str == HEX_TO_BIN)          command(s,HEX_TO_BIN);
         else if(str == RANGE)               command(s,RANGE,3);
         else if(str == COUNT)               command(s,COUNT,2);
         else if(str == ROOT)                command(s,ROOT,2);
@@ -87,6 +81,10 @@ public:
         else if(str == TO_OPPOSITE)         command(s,TO_OPPOSITE);
         else if(str == BASIC_OPERATION)     command(s,BASIC_OPERATION,3);
         else if(str == BASIC_ACC_OPERATION) command(s,BASIC_ACC_OPERATION,2);
+        else if(str == FACTORIAL)           command(s,FACTORIAL);
+        else if(str == PASSWORD_GEN)        command(s,PASSWORD_GEN);
+        else if(str == TEXT_GEN)            command(s,TEXT_GEN);
+        else if(str == TO_BASE)             command(s,TO_BASE,3);
         else if(str == HELP)                commandShow();
         else if(str == CLEAR_ACC)           String::accumulator = 0;
         else if(str == SHOW_LAST)           Out::print(String::lastResult);

@@ -7,6 +7,13 @@ namespace String
     std::string lastResult;
     long long accumulator = 0;
 
+    static const char alphanum[] =
+        "0123456789"
+        "!@#$%^&*"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+    static const char alpha[] = "abcdefghijklmnopqrstuvwxyz";
+
     inline std::string length(const std::string str)
     {
         return std::to_string(str.length());
@@ -113,88 +120,6 @@ namespace String
         for(char &c : newstr)
             c = tolower(c);
         return newstr;
-    }
-    std::string to_binary(const std::string str)
-    {
-        std::string newstr = "";
-        if(error_isnumber(str,ERROR_ARGUMENT_TYPE) == "")
-            return "";
-        if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
-            return "";
-        if(std::stoi(str) <= 255)
-            newstr = std::bitset<8>(std::stoi(str)).to_string();
-        else if(std::stoi(str) <= 65535)
-            newstr = std::bitset<16>(std::stoi(str)).to_string();
-        else
-            newstr = std::bitset<32>(std::stoi(str)).to_string();
-        return newstr;
-    }
-    std::string to_hex(const std::string str)
-    {
-        std::stringstream sstream;
-        if(error_isnumber(str,ERROR_ARGUMENT_TYPE) == "")
-            return "";
-        if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
-            return "";
-        int num = std::stoi(str);
-        int result;
-        sstream << num;
-        sstream >> std::hex >> result;
-        if(sstream.fail())
-        {
-            Out::print("Something went wrong...");
-            return "";
-        }
-        return std::to_string(result);
-    }
-    std::string bin_to_dec(const std::string str)
-    {
-        for(char c : str)
-        {
-            if(c != '1' && c != '0')
-            {
-                Out::print("Number is not binary");
-                return "";
-            }
-        }
-        if(error_size(str,31,ERROR_ARGUMENT_SIZE) != "")
-        {
-            std::string newstr = str;
-            int result = 0, base = 1;
-            for(int i = newstr.length()-1; i >= 0; i--)
-            {
-                if(newstr[i] == '1')
-                    result += base;
-                base = base * 2;
-            }
-            return std::to_string(result);
-        }
-        else
-            return "";
-    }
-    std::string bin_to_hex(const std::string str)
-    {
-        std::string temp = bin_to_dec(str);
-        if(temp == "") return "";
-        return to_hex(temp);
-    }
-    std::string hex_to_dec(const std::string str)
-    {
-        if(error_isnumber(str,ERROR_ARGUMENT_TYPE) == "")
-            return "";
-        if(error_size(str,9,ERROR_ARGUMENT_SIZE) == "")
-            return "";
-        std::stringstream sstream;
-        int i = std::stoi(str);
-        sstream << i;
-        sstream >> std::hex >> i;
-        return std::to_string(i);
-    }
-    std::string hex_to_bin(const std::string str)
-    {
-        std::string temp = hex_to_dec(str);
-        if(temp == "") return "";
-        return to_binary(temp);
     }
     std::string is_prime(const std::string str)
     {
@@ -386,6 +311,9 @@ namespace String
         if(error_size(n,3,ERROR_ARGUMENT2_SIZE) == "")
             return "";
         int number = std::stoi(num),nt = std::stoi(n);
+        if(nt < 1) return "1";
+        else if(nt == 1) return std::to_string(number);
+
         float nthroot = std::pow(number,nt);
         int in = (int)std::floor(nthroot);
         if(in == -2147483648)
@@ -418,5 +346,90 @@ namespace String
             else c = toupper(c);
         }
         return newstr;
+    }
+    std::string factorial(const std::string s)
+    {
+        if(error_isnumber(s,ERROR_ARGUMENT_TYPE) == "")
+            return "";
+        if(error_size(s,3,ERROR_ARGUMENT_SIZE) == "")
+            return "";
+        unsigned int n = std::stoi(s);
+        long long result = 1;
+        if(n > 20) return "";
+        while(n > 0)
+            result *= n--;
+        return std::to_string(result);
+    }
+    std::string toBase(const std::string num, const std::string beginBase,const std::string endBase) //todo base over 10
+    {
+        //char charToDigit[6] = {a,b,c,d,e,f};
+        if(error_isnumber(num,ERROR_ARGUMENT1_TYPE) == "")
+            return "";
+        if(error_size(num,6,ERROR_ARGUMENT1_SIZE) == "")
+            return "";
+        if(error_isnumber(beginBase,ERROR_ARGUMENT2_TYPE) == "")
+            return "";
+        if(error_size(beginBase,3,ERROR_ARGUMENT2_SIZE) == "")
+            return "";
+        if(error_isnumber(endBase,ERROR_ARGUMENT3_TYPE) == "")
+            return "";
+        if(error_size(endBase,3,ERROR_ARGUMENT3_SIZE) == "")
+            return "";
+
+        int bBase = std::stoi(beginBase), eBase = std::stoi(endBase);
+        if(bBase < MIN_BASE || eBase < MIN_BASE || bBase > MAX_BASE || eBase > MAX_BASE) return "";
+        for(char c : num)
+            if(c - '0' >= bBase) return ""; // check if numbers are legitimate in current base
+
+        int numInBase10 = 0;
+        for(int i = 0; i < num.length(); i++)
+            numInBase10 += (num[num.length()-i-1] - '0') * std::pow(bBase,i);
+
+        std::string result = "";
+        while(numInBase10 > 0)
+        {
+            int modulo = numInBase10 % eBase;
+            numInBase10 /= eBase;
+            result += std::to_string(modulo);
+        }
+        result = reverse(result);
+        return result;
+    }
+    std::string passwordGen(const std::string s)
+    {
+        if(error_isnumber(s,ERROR_ARGUMENT_TYPE) == "")
+            return "";
+        if(error_size(s,6,ERROR_ARGUMENT_SIZE) == "")
+            return "";
+        int num = std::stoi(s);
+        std::string result = "";
+        while(num-- > 0)
+            result += alphanum[rand() % static_cast<int>(sizeof(alphanum) / sizeof(alphanum[0]) - 1)];
+        return result;
+    }
+    std::string textGen(const std::string s)
+    {
+        if(error_isnumber(s,ERROR_ARGUMENT_TYPE) == "")
+            return "";
+        if(error_size(s,6,ERROR_ARGUMENT_SIZE) == "")
+            return "";
+        int num = std::stoi(s);
+        std::string result = "";
+        for(int i = 0; i < num; i++)
+        {
+            int randSentence = MIN_SENTENCE + (rand() % static_cast<int>(MAX_SENTENCE - MIN_SENTENCE));
+            result += toupper(alpha[rand() % static_cast<int>(sizeof(alpha) / sizeof(alpha[0]) - 1)]);
+            for(int i = 0; i < randSentence; i++)
+            {
+                int randWord = MIN_WORD + (rand() % static_cast<int>(MAX_WORD - MIN_WORD));
+                while(randWord-- > 0)
+                    result += alpha[rand() % static_cast<int>(sizeof(alpha) / sizeof(alpha[0]) - 1)];
+                if(i+1 == randSentence)
+                    result += ". ";
+                else
+                    result += " ";
+            }
+        }
+        return result;
     }
 }
