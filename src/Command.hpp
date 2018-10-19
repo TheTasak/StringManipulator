@@ -93,8 +93,6 @@ namespace Command
                 else if(type == IS_DIGIT)       pointer = &String::is_digit;
                 else if(type == IS_PRIME)       pointer = &String::is_prime;
                 else if(type == REVERSE)        pointer = &String::reverse;
-                else if(type == REVERSE)        pointer = &String::reverse;
-                else if(type == REVERSE)        pointer = &String::reverse;
                 else if(type == FILE_GET)       pointer = &File::getFileText;
                 else if(type == LEN)            pointer = &String::length;
                 else if(type == TO_OPPOSITE)    pointer = &String::to_opposite;

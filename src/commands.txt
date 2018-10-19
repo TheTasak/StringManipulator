@@ -1,5 +1,6 @@
 GENERAL
 help - show help
+quit - quits program
 clear - clears screen
 clearacc - clears accumulator
 clearlast - clear last result
@@ -13,7 +14,7 @@ count(string,string) - returns number of occurences of second string in first st
 
 
 CHAR MANIPULATION
-multiplychar(string, int) - multiplies given string
+multichar(string, int) - multiplies given string
 reverse(string) - reverses string
 remove(string, string) - removes second string from the first string
 replace(string, string, string) - replaces second string with third string in the first string
@@ -24,12 +25,7 @@ add_char(string,string,n) - adds second string every nth char of first string
 
 
 NUMBER SYSTEMS
-to_bin(string) - changes characters to binary
-to_hex(string) - changes characters to hexadecimal
-bin_to_dec(string) - changes binary number to decimal
-bin_to_hex(string) - changes binary number to hexadecimal
-hex_to_bin(string) - changes hexadecimal number to binary
-hex_to_dec(string) - changes hexadecimal number to decimal
+to_base(int,int,int) - number,currentbase,desired base - changes number from one base to another
 
 
 CALCULATOR
@@ -40,3 +36,10 @@ is_prime(int) - checks if number is prime
 list_prime(int,int) - list all prime numbers in range
 root(int,n) - returns root with base n of number
 random(min,max) - returns random number in range of min,max
+fac(int) - factorial of number
+
+
+RANDOM
+random(int,int) - returns a random number between first and second number
+passgen(int) - returns a random password with n chars
+textgen(int) - returns n sentences of random text
