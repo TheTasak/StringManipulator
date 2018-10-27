@@ -44,6 +44,8 @@
 #define QUIT "quit"
 #define SHOW_ACC "showacc"
 #define SHOW_LAST "showlast"
+#define CLEAR_CONTAINER "clearcon"
+#define SHOW_CONTAINER "showcon"
 
 #define LOWER "to_lower" // 1 argument
 #define UPPER "to_upper"
@@ -56,6 +58,7 @@
 #define FACTORIAL "fac"
 #define PASSWORD_GEN "passgen"
 #define TEXT_GEN "textgen"
+#define SET_CONTAINER "setcon"
 
 #define REMOVE "remove" // 2 argument
 #define MULTIPLY_CHAR "multichar"
@@ -75,9 +78,14 @@
 
 #define COMMAND_FILEPATH "src\\commands.txt"
 #define WELCOME_TEXT "Welcome to StringManipulation. Type help to see list of commands"
+#define LAST_RESULT "!"
+#define CONTAINER "$"
+
+//For toBase command
 #define MIN_BASE 2
 #define MAX_BASE 10
 
+//For textGen command
 #define MAX_WORD 12
 #define MIN_WORD 3
 #define MAX_SENTENCE 12

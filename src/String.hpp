@@ -4,7 +4,8 @@
 
 namespace String
 {
-    std::string lastResult;
+    std::string lastResult = "";
+    std::string container = "";
     long long accumulator = 0;
 
     static const char alphanum[] =
@@ -21,7 +22,7 @@ namespace String
     std::string reverse(const std::string str)
     {
         std::string new_str = "";
-        for(int i = str.length() - 1; i >= 0; i--)
+        for(unsigned int i = str.length() - 1; i >= 0; i--)
             new_str += str[i];
         return new_str;
     }
@@ -69,11 +70,16 @@ namespace String
     }
     std::string is_number(const std::string str)
     {
-        if(is_digit(str) == "True" && str[0] != '0')
+        if(str.length() > 1)
+        {
+            if(is_digit(str) == "True" && str[0] != '0')
+                return "True";
+        }
+        else if(is_digit(str) == "True")
             return "True";
         return "False";
     }
-    std::string error_size(std::string s, int i, std::string error)
+    std::string error_size(std::string s, unsigned int i, std::string error)
     {
         if(s.length() >= i)
         {
@@ -91,20 +97,21 @@ namespace String
         }
         return "a";
     }
+    std::string setContainer(std::string s)
+    {
+        String::container = s;
+        return "";
+    }
     std::string multiply(const std::string str, const std::string i)
     {
         if(error_isnumber(i,ERROR_ARGUMENT2_TYPE) == "")
             return "";
         if(error_size(i,9,ERROR_ARGUMENT2_SIZE) == "")
             return "";
-        int n = std::stoi(i);
-        n--;
+        unsigned int n = std::stoi(i) - 1;
         std::string str_copy = str;
-        while(n > 0)
-        {
+        while(n-- > 0)
             str_copy += str;
-            n--;
-        }
         return str_copy;
     }
     std::string to_upper(const std::string str)
@@ -215,7 +222,8 @@ namespace String
             return "";
         if(error_size(start,6,ERROR_ARGUMENT1_SIZE) == "")
             return "";
-        std::list<int> lis;
+        //under construction
+        /*std::list<int> lis;
         int value = std::stoi(start);
         int value2 = std::stoi(str);
         value = value < 2 ? 2 : value;
@@ -247,7 +255,8 @@ namespace String
         auto it = std::remove_if(lis.begin(), lis.end(), removeNumbers);
         lis.erase(it,lis.end());
         Out::print("Ended removing complex numbers",true);
-        return list_to_string(lis);
+        return list_to_string(lis);*/
+        return "";
     }
     std::string range(const std::string start, const std::string stop, const std::string i)
     {
@@ -264,7 +273,8 @@ namespace String
         if(error_size(i,6,ERROR_ARGUMENT3_SIZE) == "")
             return "";
 
-        int a = std::stoi(start), b = std::stoi(stop), in = std::stoi(i);
+        int a = std::stoi(start), b = std::stoi(stop);
+        unsigned int in = std::stoi(i);
         std::string str = "";
         for(int i = a; i <= b; i += in)
             str += std::string(std::to_string(i) + " ");
@@ -273,7 +283,7 @@ namespace String
     std::string count(const std::string s, const std::string fin)
     {
         bool done = false;
-        int i = 0;
+        unsigned int i = 0;
         std::size_t found = -fin.length();
         while(!done)
         {
@@ -291,9 +301,9 @@ namespace String
             return "";
         if(error_size(interval,6,ERROR_ARGUMENT3_SIZE) == "")
             return "";
-        int inter = std::stoi(interval);
+        unsigned int inter = std::stoi(interval);
         std::string result = s;
-        for(int i = 0; i < result.length(); i += inter)
+        for(unsigned int i = 0; i < result.length(); i += inter)
         {
             result.insert(i, add);
             i += add.length();
@@ -342,7 +352,7 @@ namespace String
         std::string newstr = s;
         for(char &c : newstr)
         {
-            if((int)c < 91) c = tolower(c);
+            if((unsigned int)c < 91) c = tolower(c);
             else c = toupper(c);
         }
         return newstr;
@@ -362,7 +372,7 @@ namespace String
     }
     std::string toBase(const std::string num, const std::string beginBase,const std::string endBase) //todo base over 10
     {
-        //char charToDigit[6] = {a,b,c,d,e,f};
+        char charToDigit[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
         if(error_isnumber(num,ERROR_ARGUMENT1_TYPE) == "")
             return "";
         if(error_size(num,6,ERROR_ARGUMENT1_SIZE) == "")
@@ -376,13 +386,20 @@ namespace String
         if(error_size(endBase,3,ERROR_ARGUMENT3_SIZE) == "")
             return "";
 
-        int bBase = std::stoi(beginBase), eBase = std::stoi(endBase);
-        if(bBase < MIN_BASE || eBase < MIN_BASE || bBase > MAX_BASE || eBase > MAX_BASE) return "";
+        unsigned int bBase = std::stoi(beginBase), eBase = std::stoi(endBase);
+        if(bBase < MIN_BASE || eBase < MIN_BASE || bBase > MAX_BASE || eBase > MAX_BASE) return ERROR_WRONGINPUT;
         for(char c : num)
-            if(c - '0' >= bBase) return ""; // check if numbers are legitimate in current base
-
+        {
+            bool isBase = false;
+            for(unsigned int i = 0; i < bBase; i++)
+            {
+                if(charToDigit[i] == tolower(c))
+                    isBase = true;
+            }
+            if(!isBase) return ERROR_WRONGINPUT; // check if numbers are legitimate in current base
+        }
         int numInBase10 = 0;
-        for(int i = 0; i < num.length(); i++)
+        for(unsigned int i = 0; i < num.length(); i++)
             numInBase10 += (num[num.length()-i-1] - '0') * std::pow(bBase,i);
 
         std::string result = "";
@@ -401,7 +418,7 @@ namespace String
             return "";
         if(error_size(s,6,ERROR_ARGUMENT_SIZE) == "")
             return "";
-        int num = std::stoi(s);
+        unsigned int num = std::stoi(s);
         std::string result = "";
         while(num-- > 0)
             result += alphanum[rand() % static_cast<int>(sizeof(alphanum) / sizeof(alphanum[0]) - 1)];
@@ -413,21 +430,20 @@ namespace String
             return "";
         if(error_size(s,6,ERROR_ARGUMENT_SIZE) == "")
             return "";
-        int num = std::stoi(s);
+        unsigned int num = std::stoi(s);
         std::string result = "";
-        for(int i = 0; i < num; i++)
+        for(unsigned int i = 0; i < num; i++)
         {
-            int randSentence = MIN_SENTENCE + (rand() % static_cast<int>(MAX_SENTENCE - MIN_SENTENCE));
+            unsigned int randSentence = MIN_SENTENCE + (rand() % static_cast<int>(MAX_SENTENCE - MIN_SENTENCE));
             result += toupper(alpha[rand() % static_cast<int>(sizeof(alpha) / sizeof(alpha[0]) - 1)]);
-            for(int i = 0; i < randSentence; i++)
+            for(unsigned int i = 0; i < randSentence; i++)
             {
-                int randWord = MIN_WORD + (rand() % static_cast<int>(MAX_WORD - MIN_WORD));
+                unsigned int randWord = MIN_WORD + (rand() % static_cast<int>(MAX_WORD - MIN_WORD));
                 while(randWord-- > 0)
                     result += alpha[rand() % static_cast<int>(sizeof(alpha) / sizeof(alpha[0]) - 1)];
                 if(i+1 == randSentence)
-                    result += ". ";
-                else
-                    result += " ";
+                    result += ".";
+                result += " ";
             }
         }
         return result;

@@ -56,24 +56,31 @@ namespace Command
     template <typename T>
     void resultUpdate(std::string (*pointer)(T), std::string one)
     {
-        if(one == "!" && String::lastResult != "")
+        if(one == LAST_RESULT && String::lastResult != "")
             String::lastResult = pointer(String::lastResult);
+        else if(one == CONTAINER && String::container != "")
+            String::lastResult = pointer(String::container);
         else
             String::lastResult = pointer(one);
     }
     template <typename T>
     void resultUpdate(std::string (*pointer)(T,T), std::string one, std::string two)
     {
-        std::string o_1 = (one == "!" && String::lastResult != "") ? String::lastResult : one;
-        std::string o_2 = (two == "!" && String::lastResult != "") ? String::lastResult : two;
+        std::string o_1 = (one == LAST_RESULT && String::lastResult != "") ? String::lastResult : one;
+        o_1 = (one == CONTAINER) ? String::container : o_1;
+        std::string o_2 = (two == LAST_RESULT && String::lastResult != "") ? String::lastResult : two;
+        o_2 = (two == CONTAINER) ? String::container : o_2;
         String::lastResult = pointer(o_1,o_2);
     }
     template <typename T>
     void resultUpdate(std::string (*pointer)(T,T,T), std::string one, std::string two,std::string three)
     {
-        std::string o_1 = (one == "!" && String::lastResult != "") ? String::lastResult : one;
-        std::string o_2 = (two == "!" && String::lastResult != "") ? String::lastResult : two;
-        std::string o_3 = (three == "!" && String::lastResult != "") ? String::lastResult : three;
+        std::string o_1 = (one == LAST_RESULT && String::lastResult != "") ? String::lastResult : one;
+        o_1 = (one == CONTAINER) ? String::container : o_1;
+        std::string o_2 = (two == LAST_RESULT && String::lastResult != "") ? String::lastResult : two;
+        o_2 = (two == CONTAINER) ? String::container : o_2;
+        std::string o_3 = (three == LAST_RESULT && String::lastResult != "") ? String::lastResult : three;
+        o_3 = (three == CONTAINER) ? String::container : o_3;
         String::lastResult = pointer(o_1,o_2,o_3);
     }
     void command(std::string s,std::string type,int arguments = 1)
@@ -99,6 +106,7 @@ namespace Command
                 else if(type == FACTORIAL)      pointer = &String::factorial;
                 else if(type == PASSWORD_GEN)   pointer = &String::passwordGen;
                 else if(type == TEXT_GEN)       pointer = &String::textGen;
+                else if(type == SET_CONTAINER)  pointer = &String::setContainer;
 
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);

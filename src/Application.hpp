@@ -2,16 +2,11 @@
 
 class Application
 {
-    std::vector<std::string> vec;
     std::string globalInput = "";
     bool done = false;
     void init()
     {
         Out::print(WELCOME_TEXT,true);
-        vec.push_back(std::string(" " + String::multiply("_", std::to_string(X_SIZE)) + " "));
-        for(int i = 0; i < Y_SIZE; i++)
-            vec.push_back(std::string("|" + String::multiply(" ", std::to_string(X_SIZE)) + "|"));
-        vec.push_back(std::string("|" + String::multiply("_", std::to_string(X_SIZE)) + "|"));
     }
     void show()
     {
@@ -92,6 +87,9 @@ public:
         else if(str == CLEAR_LAST)          String::lastResult = "";
         else if(str == QUIT)                exit();
         else if(str == CLEAR)               clear();
+        else if(str == SET_CONTAINER)       command(s,SET_CONTAINER);
+        else if(str == CLEAR_CONTAINER)     String::container = "";
+        else if(str == SHOW_CONTAINER)      Out::print(String::container);
         else                                Out::print(ERROR_COMMAND_NOT_DEFINED);
     }
 };
