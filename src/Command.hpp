@@ -67,20 +67,20 @@ namespace Command
     void resultUpdate(std::string (*pointer)(T,T), std::string one, std::string two)
     {
         std::string o_1 = (one == LAST_RESULT && String::lastResult != "") ? String::lastResult : one;
-        o_1 = (one == CONTAINER) ? String::container : o_1;
+        if(one == CONTAINER) o_1 = String::container;
         std::string o_2 = (two == LAST_RESULT && String::lastResult != "") ? String::lastResult : two;
-        o_2 = (two == CONTAINER) ? String::container : o_2;
+        if(two == CONTAINER) o_2 = String::container;
         String::lastResult = pointer(o_1,o_2);
     }
     template <typename T>
     void resultUpdate(std::string (*pointer)(T,T,T), std::string one, std::string two,std::string three)
     {
         std::string o_1 = (one == LAST_RESULT && String::lastResult != "") ? String::lastResult : one;
-        o_1 = (one == CONTAINER) ? String::container : o_1;
+        if(one == CONTAINER) o_1 = String::container;
         std::string o_2 = (two == LAST_RESULT && String::lastResult != "") ? String::lastResult : two;
-        o_2 = (two == CONTAINER) ? String::container : o_2;
+        if(two == CONTAINER) o_2 = String::container;
         std::string o_3 = (three == LAST_RESULT && String::lastResult != "") ? String::lastResult : three;
-        o_3 = (three == CONTAINER) ? String::container : o_3;
+        if(three == CONTAINER) o_3 = String::container;
         String::lastResult = pointer(o_1,o_2,o_3);
     }
     void command(std::string s,std::string type,int arguments = 1)

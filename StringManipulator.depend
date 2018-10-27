@@ -85,7 +85,7 @@
 1539551116 source:c:\users\saturn\desktop\c++\stringmanipulator\src\main.cpp
 	"Application.hpp"
 
-1540648404 c:\users\saturn\desktop\c++\stringmanipulator\src\command.hpp
+1540673599 c:\users\saturn\desktop\c++\stringmanipulator\src\command.hpp
 	"Utilities.hpp"
 	"String.hpp"
 	"File.hpp"
@@ -106,7 +106,7 @@
 	<ctime>
 	<cstdlib>
 
-1540649929 c:\users\saturn\desktop\c++\stringmanipulator\src\string.hpp
+1540674595 c:\users\saturn\desktop\c++\stringmanipulator\src\string.hpp
 	"Utilities.hpp"
 
 1537122978 c:\users\saturn\desktop\c++\stringmanipulator\src\file.hpp

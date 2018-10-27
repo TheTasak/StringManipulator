@@ -157,7 +157,7 @@ namespace String
             return "";
 
         long long temp = std::stoll(atemp);
-        temp = isMinus ? -temp : temp;
+        if(isMinus) temp = -temp;
 		String::lastResult = std::to_string(temp);
 		if(operation == "+") String::accumulator += temp;
 		else if(operation == "-") String::accumulator -= temp;
@@ -222,10 +222,9 @@ namespace String
             return "";
         if(error_size(start,6,ERROR_ARGUMENT1_SIZE) == "")
             return "";
-        //under construction
-        /*std::list<int> lis;
+        std::list<int> lis;
         int value = std::stoi(start);
-        int value2 = std::stoi(str);
+        int value2 = std::stoi(str)+1;
         value = value < 2 ? 2 : value;
         if(value > value2 || value2 < 3)
             return "";
@@ -234,29 +233,26 @@ namespace String
             lis.push_back(i);
         Out::print("Ended pushing values",true);
         Out::print("Started removing complex numbers...",true);
-        auto lastDivisor = std::find(lis.begin(), lis.end(), std::sqrt(value2));
-        for(auto i = lis.begin(); i != lastDivisor; ++i)
+        auto lastDivisor = std::find(lis.begin(), lis.end(), (int)std::sqrt(value2));
+        for(auto i = lis.begin(); *i < *lastDivisor; ++i)
         {
-            int multiply = *i,constant = *i;
+            int multiply = *i;
             bool done = false;
             while(!done)
             {
-                multiply += constant;
+                multiply += *i;
                 if(multiply > value2)
                     done = true;
                 else
                     lis.remove(multiply);
             }
         }
-        auto removeNumbers = [&](int number) -> bool
-        {
-            return number < value;
-        };
+        auto removeNumbers = [&](int number) -> bool { return number < value; };
         auto it = std::remove_if(lis.begin(), lis.end(), removeNumbers);
         lis.erase(it,lis.end());
+
         Out::print("Ended removing complex numbers",true);
-        return list_to_string(lis);*/
-        return "";
+        return list_to_string(lis);
     }
     std::string range(const std::string start, const std::string stop, const std::string i)
     {
