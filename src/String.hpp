@@ -211,7 +211,6 @@ namespace String
             str += std::string(std::to_string(*i) + " ");
         return str;
     }
-
     std::string listPrime(const std::string start, const std::string str)
     {
         if(error_isnumber(str,ERROR_ARGUMENT2_TYPE) == "")
@@ -369,8 +368,6 @@ namespace String
     std::string toBase(const std::string num, const std::string beginBase,const std::string endBase) //todo base over 10
     {
         char charToDigit[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
-        if(error_isnumber(num,ERROR_ARGUMENT1_TYPE) == "")
-            return "";
         if(error_size(num,6,ERROR_ARGUMENT1_SIZE) == "")
             return "";
         if(error_isnumber(beginBase,ERROR_ARGUMENT2_TYPE) == "")
@@ -396,16 +393,21 @@ namespace String
         }
         int numInBase10 = 0;
         for(unsigned int i = 0; i < num.length(); i++)
-            numInBase10 += (num[num.length()-i-1] - '0') * std::pow(bBase,i);
-
+        {
+            char c = num[num.length()-i-1];
+            char *p = std::find(std::begin(charToDigit),std::end(charToDigit),c);
+            if(p == std::end(charToDigit))
+                return ERROR_WRONGINPUT;
+            numInBase10 +=  std::distance(charToDigit,p) * std::pow(bBase,i);
+        }
         std::string result = "";
         while(numInBase10 > 0)
         {
             int modulo = numInBase10 % eBase;
-            numInBase10 /= eBase;
+            numInBase10 = std::floor(numInBase10 / eBase);
             result += std::to_string(modulo);
         }
-        result = reverse(result);
+        std::reverse(result.begin(), result.end());
         return result;
     }
     std::string passwordGen(const std::string s)

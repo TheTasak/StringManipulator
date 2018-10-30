@@ -83,7 +83,7 @@
 
 //For toBase command
 #define MIN_BASE 2
-#define MAX_BASE 10
+#define MAX_BASE 16
 
 //For textGen command
 #define MAX_WORD 12
