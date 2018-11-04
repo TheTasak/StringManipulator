@@ -446,4 +446,34 @@ namespace String
         }
         return result;
     }
+    std::string wordCount(const std::string s)
+    {
+        unsigned int c = 0;
+        if(s != "") c = 1;
+        for(unsigned int i = 0; i < s.length(); i++)
+        {
+            if(s[i] == ' ' && s[i+1] != ' ' && i+1 < s.length())
+                c++;
+        }
+        return std::to_string(c);
+    }
+    std::string split(const std::string s, const std::string separator)
+    {
+        bool done = false;
+        unsigned int i = 0;
+        std::size_t found = -separator.length();
+        std::string result = s;
+        while(!done)
+        {
+            found = result.find(separator,found+separator.length());
+            if(found != std::string::npos)
+            {
+                result.insert(found+1,"\n");
+                found++;
+            }
+            else
+                done = true;
+        }
+        return result;
+    }
 }

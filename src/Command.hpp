@@ -107,6 +107,7 @@ namespace Command
                 else if(type == PASSWORD_GEN)   pointer = &String::passwordGen;
                 else if(type == TEXT_GEN)       pointer = &String::textGen;
                 else if(type == SET_CONTAINER)  pointer = &String::setContainer;
+                else if(type == WORD_COUNT)     pointer = &String::wordCount;
 
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
@@ -134,6 +135,7 @@ namespace Command
                 else if(type == ROOT)                   pointer = &String::root;
                 else if(type == RANDOM)                 pointer = &String::random;
                 else if(type == BASIC_ACC_OPERATION)    pointer = &String::basicAccOperation;
+                else if(type == SPLIT)                  pointer = &String::split;
 
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);

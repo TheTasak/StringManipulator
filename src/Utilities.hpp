@@ -59,6 +59,7 @@
 #define PASSWORD_GEN "passgen"
 #define TEXT_GEN "textgen"
 #define SET_CONTAINER "setcon"
+#define WORD_COUNT "wordcount"
 
 #define REMOVE "remove" // 2 argument
 #define MULTIPLY_CHAR "multichar"
@@ -68,6 +69,7 @@
 #define ROOT "root"
 #define RANDOM "random"
 #define BASIC_OPERATION "operation"
+#define SPLIT "split"
 
 #define REPLACE "replace" // 3 argument
 #define RANGE "range"

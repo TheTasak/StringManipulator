@@ -85,12 +85,12 @@
 1539547516 source:c:\users\saturn\desktop\c++\stringmanipulator\src\main.cpp
 	"Application.hpp"
 
-1540669999 c:\users\saturn\desktop\c++\stringmanipulator\src\command.hpp
+1541158056 c:\users\saturn\desktop\c++\stringmanipulator\src\command.hpp
 	"Utilities.hpp"
 	"String.hpp"
 	"File.hpp"
 
-1540932325 c:\users\saturn\desktop\c++\stringmanipulator\src\utilities.hpp
+1541158030 c:\users\saturn\desktop\c++\stringmanipulator\src\utilities.hpp
 	<iostream>
 	"windows.h"
 	<string>
@@ -106,7 +106,7 @@
 	<ctime>
 	<cstdlib>
 
-1540932174 c:\users\saturn\desktop\c++\stringmanipulator\src\string.hpp
+1541158278 c:\users\saturn\desktop\c++\stringmanipulator\src\string.hpp
 	"Utilities.hpp"
 
 1537119378 c:\users\saturn\desktop\c++\stringmanipulator\src\file.hpp
@@ -114,6 +114,6 @@
 	"String.hpp"
 	<fstream>
 
-1540644496 c:\users\saturn\desktop\c++\stringmanipulator\src\application.hpp
+1541158041 c:\users\saturn\desktop\c++\stringmanipulator\src\application.hpp
 	"Command.hpp"
 

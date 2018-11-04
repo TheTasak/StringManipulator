@@ -88,6 +88,8 @@ public:
         else if(str == QUIT)                exit();
         else if(str == CLEAR)               clear();
         else if(str == SET_CONTAINER)       command(s,SET_CONTAINER);
+        else if(str == WORD_COUNT)          command(s,WORD_COUNT);
+        else if(str == SPLIT)               command(s,SPLIT,2);
         else if(str == CLEAR_CONTAINER)     String::container = "";
         else if(str == SHOW_CONTAINER)      Out::print(String::container);
         else                                Out::print(ERROR_COMMAND_NOT_DEFINED);
