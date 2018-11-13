@@ -146,11 +146,13 @@ namespace String
     {
         bool isMinus = false;
         std::string atemp = a;
-        if(a[0] == '-')
+        if(a[0] == '-' && a.length() > 1)
         {
             isMinus = true;
             atemp.erase(atemp.begin());
         }
+        else if(a[0] == '-' && a.length() <= 1)
+            return ERROR_ARGUMENT_TYPE;
         if(error_isnumber(atemp,ERROR_ARGUMENT_TYPE) == "")
             return "";
         if(error_size(atemp,9,ERROR_ARGUMENT_SIZE) == "")
@@ -171,16 +173,20 @@ namespace String
         std::string atemp = a;
         std::string btemp = b;
         bool isMinusA = false, isMinusB = false;
-        if(a[0] == '-')
+        if(a[0] == '-' && a.length() > 1)
         {
             isMinusA = true;
             atemp.erase(atemp.begin());
         }
-        if(b[0] == '-')
+        else if(a[0] == '-' && a.length() <= 1)
+            return ERROR_ARGUMENT1_TYPE;
+        if(b[0] == '-' && b.length() > 1)
         {
             isMinusB = true;
             btemp.erase(btemp.begin());
         }
+        else if(b[0] == '-' && b.length() <= 1)
+            return ERROR_ARGUMENT2_TYPE;
         if(error_isnumber(atemp,ERROR_ARGUMENT1_TYPE) == "")
             return "";
         if(error_isnumber(btemp,ERROR_ARGUMENT2_TYPE) == "")
@@ -460,19 +466,49 @@ namespace String
     std::string split(const std::string s, const std::string separator)
     {
         bool done = false;
-        unsigned int i = 0;
         std::size_t found = -separator.length();
         std::string result = s;
         while(!done)
         {
             found = result.find(separator,found+separator.length());
             if(found != std::string::npos)
-            {
-                result.insert(found+1,"\n");
-                found++;
-            }
+                result.insert(++found,"\n");
             else
                 done = true;
+        }
+        return result;
+    }
+    std::string rotate(const std::string s, const std::string dir)
+    {
+        if(dir.length() != 1 && (dir[0] != 'l' && dir[0] != 'r'))
+            return ERROR_ARGUMENT2_TYPE;
+        if(s.length() < 2)
+            return ERROR_ARGUMENT1_SIZE;
+        std::string result = "";
+        if(dir == "l")
+            result += std::string(s.substr(1) + s[0]);
+        else
+            result += std::string(s[0] + s.substr(1));
+        return result;
+    }
+    std::string to_ascii(const std::string s)
+    {
+        std::string result = "";
+        for(char c : s)
+            result += (std::string)std::to_string((int)c) + " ";
+        return result;
+    }
+    std::string to_text(const std::string s)
+    {
+        bool done = false;
+        std::size_t found = -3;
+        std::string result;
+        while(!done)
+        {
+            found = s.find(" ", found+3);
+            std::string con = s.substr(0,found);
+            int val = std::stoi(con);
+            result += (char)val;
         }
         return result;
     }

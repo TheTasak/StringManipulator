@@ -108,6 +108,8 @@ namespace Command
                 else if(type == TEXT_GEN)       pointer = &String::textGen;
                 else if(type == SET_CONTAINER)  pointer = &String::setContainer;
                 else if(type == WORD_COUNT)     pointer = &String::wordCount;
+                else if(type == TO_ASCII)       pointer = &String::to_ascii;
+                else if(type == TO_TEXT)        pointer = &String::to_text;
 
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);
@@ -136,6 +138,7 @@ namespace Command
                 else if(type == RANDOM)                 pointer = &String::random;
                 else if(type == BASIC_ACC_OPERATION)    pointer = &String::basicAccOperation;
                 else if(type == SPLIT)                  pointer = &String::split;
+                else if(type == ROTATE)                 pointer = &String::rotate;
 
                 if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
                     first = File::getFileText(first);

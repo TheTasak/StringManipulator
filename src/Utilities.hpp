@@ -60,6 +60,8 @@
 #define TEXT_GEN "textgen"
 #define SET_CONTAINER "setcon"
 #define WORD_COUNT "wordcount"
+#define TO_ASCII "to_ascii"
+#define TO_TEXT "to_text"
 
 #define REMOVE "remove" // 2 argument
 #define MULTIPLY_CHAR "multichar"
@@ -70,6 +72,7 @@
 #define RANDOM "random"
 #define BASIC_OPERATION "operation"
 #define SPLIT "split"
+#define ROTATE "rotate"
 
 #define REPLACE "replace" // 3 argument
 #define RANGE "range"
