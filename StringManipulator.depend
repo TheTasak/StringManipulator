@@ -117,3 +117,38 @@
 1541948618 c:\users\saturn\desktop\c++\stringmanipulator\src\application.hpp
 	"Command.hpp"
 
+1544291892 source:f:\progra\stringmanipulator\stringmanipulator\src\main.cpp
+	"Application.hpp"
+
+1544291892 f:\progra\stringmanipulator\stringmanipulator\src\application.hpp
+	"Command.hpp"
+
+1544291892 f:\progra\stringmanipulator\stringmanipulator\src\command.hpp
+	"Utilities.hpp"
+	"String.hpp"
+	"File.hpp"
+
+1544291892 f:\progra\stringmanipulator\stringmanipulator\src\utilities.hpp
+	<iostream>
+	"windows.h"
+	<string>
+	<cmath>
+	<vector>
+	<bitset>
+	<iomanip>
+	<sstream>
+	<list>
+	<algorithm>
+	<iostream>
+	"windows.h"
+	<ctime>
+	<cstdlib>
+
+1544457201 f:\progra\stringmanipulator\stringmanipulator\src\string.hpp
+	"Utilities.hpp"
+
+1540565156 f:\progra\stringmanipulator\stringmanipulator\src\file.hpp
+	"Utilities.hpp"
+	"String.hpp"
+	<fstream>
+

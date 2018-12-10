@@ -501,14 +501,21 @@ namespace String
     std::string to_text(const std::string s)
     {
         bool done = false;
-        std::size_t found = -3;
-        std::string result;
+        std::size_t found = -4;
+        std::string result, strcopy = s + " ";
         while(!done)
         {
-            found = s.find(" ", found+3);
-            std::string con = s.substr(0,found);
-            int val = std::stoi(con);
-            result += (char)val;
+            found = strcopy.find(" ", found+4);
+            if(found != std::string::npos)
+            {
+                std::string con = strcopy.substr(found-3,found);
+                for(auto c : con)
+                    if(!isdigit(c) && c != ' ') return ERROR_ARGUMENT_TYPE;
+                int val = std::stoi(con);
+                result += (char)val;
+            }
+            else
+                done = true;
         }
         return result;
     }
