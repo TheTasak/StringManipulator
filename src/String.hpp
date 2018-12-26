@@ -22,7 +22,7 @@ namespace String
     std::string reverse(const std::string str)
     {
         std::string new_str = "";
-        for(unsigned int i = str.length() - 1; i >= 0; i--)
+        for(int i = str.length() - 1; i >= 0; i--)
             new_str += str[i];
         return new_str;
     }
@@ -276,6 +276,7 @@ namespace String
 
         int a = std::stoi(start), b = std::stoi(stop);
         unsigned int in = std::stoi(i);
+        if(in <= 0) return "Argument 3 must be greater than 0";
         std::string str = "";
         for(int i = a; i <= b; i += in)
             str += std::string(std::to_string(i) + " ");
@@ -501,21 +502,31 @@ namespace String
     std::string to_text(const std::string s)
     {
         bool done = false;
-        std::size_t found = -4;
-        std::string result, strcopy = s + " ";
+        unsigned int found = 0;
+        unsigned int previous = 0;
+
+        std::string result, strcopy = s;
+        if(strcopy[0] != ' ') strcopy = " " + s;
+        if(strcopy[strcopy.size()-1] != ' ') strcopy += " ";
+
         while(!done)
         {
-            found = strcopy.find(" ", found+4);
-            if(found != std::string::npos)
+            previous = found;
+            for(unsigned int i = found+1; i < strcopy.size(); i++)
             {
-                std::string con = strcopy.substr(found-3,found);
+                found = strcopy[i] == ' ' ? i : found;
+                if(found == i) break;
+            }
+            if(found == previous)
+                done = true;
+            else
+            {
+                std::string con = strcopy.substr(previous,found-previous);
                 for(auto c : con)
                     if(!isdigit(c) && c != ' ') return ERROR_ARGUMENT_TYPE;
                 int val = std::stoi(con);
                 result += (char)val;
             }
-            else
-                done = true;
         }
         return result;
     }

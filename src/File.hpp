@@ -1,5 +1,5 @@
+#pragma once
 #include "Utilities.hpp"
-#include "String.hpp"
 
 #include <fstream>
 
@@ -22,10 +22,16 @@ namespace File
         file.close();
         return result;
     }
-    std::string setFileText(std::string filename, std::string content)
+    std::string setFileText(std::string filename, std::string content, int type = FILE_TRUNC)
     {
         std::fstream file;
-        file.open(filename, std::fstream::out | std::fstream::trunc);
+        if(type == FILE_TRUNC)
+            file.open(filename, std::fstream::out | std::fstream::trunc);
+        else if(type == FILE_APP)
+            file.open(filename, std::fstream::out | std::fstream::app);
+        else if(type == FILE_ATE)
+            file.open(filename, std::fstream::out | std::fstream::ate);
+
         if(file.fail() || !file.is_open())
             return ERROR_OPENFILE;
         file << content;

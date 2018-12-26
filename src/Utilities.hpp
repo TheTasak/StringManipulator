@@ -62,6 +62,7 @@
 #define WORD_COUNT "wordcount"
 #define TO_ASCII "to_ascii"
 #define TO_TEXT "to_text"
+#define RUN "run"
 
 #define REMOVE "remove" // 2 argument
 #define MULTIPLY_CHAR "multichar"
@@ -95,6 +96,11 @@
 #define MIN_WORD 3
 #define MAX_SENTENCE 12
 #define MIN_SENTENCE 2
+
+//For file commands
+#define FILE_TRUNC 0
+#define FILE_APP 1
+#define FILE_ATE 2
 namespace Out
 {
 	template<typename T>

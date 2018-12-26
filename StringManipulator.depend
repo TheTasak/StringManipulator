@@ -85,12 +85,12 @@
 1541854286 source:c:\users\saturn\desktop\c++\stringmanipulator\src\main.cpp
 	"Application.hpp"
 
-1541948651 c:\users\saturn\desktop\c++\stringmanipulator\src\command.hpp
+1545769118 c:\users\saturn\desktop\c++\stringmanipulator\src\command.hpp
 	"Utilities.hpp"
 	"String.hpp"
 	"File.hpp"
 
-1541948587 c:\users\saturn\desktop\c++\stringmanipulator\src\utilities.hpp
+1545768635 c:\users\saturn\desktop\c++\stringmanipulator\src\utilities.hpp
 	<iostream>
 	"windows.h"
 	<string>
@@ -106,15 +106,14 @@
 	<ctime>
 	<cstdlib>
 
-1541948793 c:\users\saturn\desktop\c++\stringmanipulator\src\string.hpp
+1545838776 c:\users\saturn\desktop\c++\stringmanipulator\src\string.hpp
 	"Utilities.hpp"
 
-1537119378 c:\users\saturn\desktop\c++\stringmanipulator\src\file.hpp
+1545768121 c:\users\saturn\desktop\c++\stringmanipulator\src\file.hpp
 	"Utilities.hpp"
-	"String.hpp"
 	<fstream>
 
-1541948618 c:\users\saturn\desktop\c++\stringmanipulator\src\application.hpp
+1545746793 c:\users\saturn\desktop\c++\stringmanipulator\src\application.hpp
 	"Command.hpp"
 
 1544291892 source:f:\progra\stringmanipulator\stringmanipulator\src\main.cpp
@@ -151,4 +150,7 @@
 	"Utilities.hpp"
 	"String.hpp"
 	<fstream>
+
+1545744330 c:\users\saturn\desktop\c++\stringmanipulator\src\sm.hpp
+	"Command.hpp"
 
