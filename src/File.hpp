@@ -22,14 +22,14 @@ namespace File
         file.close();
         return result;
     }
-    std::string setFileText(std::string filename, std::string content, int type = FILE_TRUNC)
+    std::string setFileText(std::string filename, std::string content, std::string type = FLAG_FILEOUT_DEFAULT)
     {
         std::fstream file;
-        if(type == FILE_TRUNC)
+        if(type == FLAG_FILEOUT_DEFAULT || type == FLAG_FILEOUT_TRUNC || FLAG_FILEINOUT_TRUNC || FLAG_FILEINOUT_DEFAULT)
             file.open(filename, std::fstream::out | std::fstream::trunc);
-        else if(type == FILE_APP)
+        else if(type == FLAG_FILEOUT_APP || type == FLAG_FILEINOUT_APP)
             file.open(filename, std::fstream::out | std::fstream::app);
-        else if(type == FILE_ATE)
+        else if(type == FLAG_FILEOUT_APP || type == FLAG_FILEINOUT_APP)
             file.open(filename, std::fstream::out | std::fstream::ate);
 
         if(file.fail() || !file.is_open())
@@ -37,9 +37,9 @@ namespace File
         file << content;
         return "";
     }
-    std::string setGetFileText(std::string filename, std::string content)
+    std::string setGetFileText(std::string filename, std::string content, std::string type = FLAG_FILEINOUT_DEFAULT)
     {
-        if(setFileText(filename,content) != "")
+        if(setFileText(filename,content,type) != "")
             return ERROR_OPENFILE;
         return getFileText(filename);
     }

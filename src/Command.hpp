@@ -12,18 +12,21 @@ namespace Command
         {
             std::string s = input.substr(par+1);
             std::string flag = s;
-            std::size_t found;
-            found = s.find(FLAG_FILEINOUT);
-            if(found != std::string::npos)
-                return FLAG_FILEINOUT;
-            found = s.find(FLAG_FILEOUT);
-            if(found != std::string::npos)
-                return FLAG_FILEOUT;
-            found = s.find(FLAG_FILEIN);
-            if(found != std::string::npos)
-                return FLAG_FILEIN;
-            else
-                return FLAG_BLANK;
+            std::string flagtab[] = {FLAG_FILEINOUT_APP, FLAG_FILEINOUT_ATE, FLAG_FILEINOUT_TRUNC, FLAG_FILEINOUT_DEFAULT,
+                                 FLAG_FILEIN_DEFAULT, FLAG_FILEOUT_APP, FLAG_FILEOUT_ATE, FLAG_FILEOUT_DEFAULT,
+                                 FLAG_FILEOUT_TRUNC};
+            std::size_t foundfirst = flag.find_first_of("?");
+            std::size_t foundlast = flag.find_last_of("?");
+            if(foundfirst != std::string::npos && foundlast != std::string::npos)
+                flag.erase(foundfirst,foundlast);
+            for(int i = 0; i < 9; i++)
+            {
+                if(flag == flagtab[i])
+                    return flagtab[i];
+            }
+            if(flag != "")
+                return FLAG_WRONG;
+            return FLAG_BLANK;
         }
         else
             return FLAG_BLANK;
@@ -42,11 +45,13 @@ namespace Command
     }
     std::string saveToFile(std::string s, std::string content = "")
     {
-        if(checkFlag(s) == FLAG_FILEOUT || checkFlag(s) == FLAG_FILEINOUT)
+        if(checkFlag(s) == FLAG_FILEOUT_APP || checkFlag(s) == FLAG_FILEOUT_ATE || checkFlag(s) == FLAG_FILEOUT_TRUNC ||
+           checkFlag(s) == FLAG_FILEOUT_DEFAULT || checkFlag(s) == FLAG_FILEINOUT_APP || checkFlag(s) == FLAG_FILEINOUT_TRUNC ||
+           checkFlag(s) == FLAG_FILEINOUT_DEFAULT || checkFlag(s) == FLAG_FILEINOUT_ATE)
         {
             std::string filename = getFileName(s);
             if(!filename.empty())
-                File::setFileText(filename,String::lastResult);
+                File::setFileText(filename,String::lastResult, checkFlag(s));
         }
         else if(content != "")
         {
@@ -124,8 +129,12 @@ namespace Command
                 else if(type == TO_ASCII)       pointer = &String::to_ascii;
                 else if(type == TO_TEXT)        pointer = &String::to_text;
                 else if(type == RUN)            pointer = &Command::run;
+                else if(type == REMOVE_NUM)     pointer = &String::removenumbers;
+                else if(type == REMOVE_TEXT)    pointer = &String::removetext;
+                else                            pointer = nullptr;
 
-                if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
+                if(checkFlag(s) == FLAG_FILEIN_DEFAULT || checkFlag(s) == FLAG_FILEINOUT_APP || checkFlag(s) == FLAG_FILEINOUT_ATE ||
+                   checkFlag(s) == FLAG_FILEINOUT_DEFAULT || checkFlag(s) == FLAG_FILEINOUT_TRUNC)
                     first = File::getFileText(first);
                 resultUpdate(pointer,first);
                 saveToFile(s);
@@ -153,8 +162,11 @@ namespace Command
                 else if(type == BASIC_ACC_OPERATION)    pointer = &String::basicAccOperation;
                 else if(type == SPLIT)                  pointer = &String::split;
                 else if(type == ROTATE)                 pointer = &String::rotate;
+                else if(type == REMOVE_NTH)             pointer = &String::removenth;
+                else                                    pointer = nullptr;
 
-                if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
+                if(checkFlag(s) == FLAG_FILEIN_DEFAULT || checkFlag(s) == FLAG_FILEINOUT_APP || checkFlag(s) == FLAG_FILEINOUT_ATE ||
+                   checkFlag(s) == FLAG_FILEINOUT_DEFAULT || checkFlag(s) == FLAG_FILEINOUT_TRUNC)
                     first = File::getFileText(first);
                 resultUpdate(pointer,first,second);
                 saveToFile(s);
@@ -180,10 +192,13 @@ namespace Command
                     if(type == REPLACE)                 pointer = &String::replace;
                     else if(type == RANGE)              pointer = &String::range;
                     else if(type == ADD_CHAR)           pointer = &String::addChar;
+                    else if(type == REMOVE_RANGE)       pointer = &String::removerange;
                     else if(type == BASIC_OPERATION)    pointer = &String::basicOperation;
                     else if(type == TO_BASE)            pointer = &String::toBase;
+                    else                                pointer = nullptr;
 
-                    if(checkFlag(s) == FLAG_FILEIN || checkFlag(s) == FLAG_FILEINOUT)
+                    if(checkFlag(s) == FLAG_FILEIN_DEFAULT || checkFlag(s) == FLAG_FILEINOUT_APP || checkFlag(s) == FLAG_FILEINOUT_ATE ||
+                       checkFlag(s) == FLAG_FILEINOUT_DEFAULT || checkFlag(s) == FLAG_FILEINOUT_TRUNC)
                         first = File::getFileText(first);
                     resultUpdate(pointer,first,second,third);
                     saveToFile(s);
@@ -239,8 +254,13 @@ namespace Command
         else if(str == ROTATE)              command(s,ROTATE,2);
         else if(str == TO_ASCII)            command(s,TO_ASCII);
         else if(str == TO_TEXT)             command(s,TO_TEXT);
+        else if(str == REMOVE_TEXT)         command(s,REMOVE_TEXT);
+        else if(str == REMOVE_NUM)          command(s,REMOVE_NUM);
+        else if(str == REMOVE_RANGE)        command(s,REMOVE_RANGE,3);
+        else if(str == REMOVE_NTH)          command(s,REMOVE_NTH,2);
         else if(str == CLEAR_CONTAINER)     String::container = "";
         else if(str == SHOW_CONTAINER)      Out::print(String::container);
+        //else if(str == LIST_DIR)            Out::print(String::ls());
         else                                Out::print(ERROR_COMMAND_NOT_DEFINED);
     }
     std::string run(const std::string s)

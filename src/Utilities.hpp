@@ -11,6 +11,8 @@
 #include <list>
 #include <algorithm>
 #include <iostream>
+#include <iterator>
+#include <filesystem>
 #include "windows.h"
 #include <ctime>
 #include <cstdlib>
@@ -28,10 +30,18 @@
 #define ERROR_WRONGINPUT "Input is not correct. Try again"
 #define ERROR_COMMAND_NOT_DEFINED "That command doesn't exist. Try again!"
 
+//For file commands
 #define FLAG_BLANK ""
-#define FLAG_FILEIN "-fin"
-#define FLAG_FILEOUT "-fout"
-#define FLAG_FILEINOUT "-finout"
+#define FLAG_FILEIN_DEFAULT "-fin"
+#define FLAG_FILEOUT_DEFAULT "-fout"
+#define FLAG_FILEOUT_TRUNC "-fotr"
+#define FLAG_FILEOUT_APP "-foapp"
+#define FLAG_FILEOUT_ATE "-foate"
+#define FLAG_FILEINOUT_DEFAULT "-fiot"
+#define FLAG_FILEINOUT_TRUNC "-fior"
+#define FLAG_FILEINOUT_APP "-fioapp"
+#define FLAG_FILEINOUT_ATE "-fioate"
+#define FLAG_WRONG ""
 
 #define X_SIZE 112
 #define Y_SIZE 13
@@ -46,6 +56,7 @@
 #define SHOW_LAST "showlast"
 #define CLEAR_CONTAINER "clearcon"
 #define SHOW_CONTAINER "showcon"
+#define LIST_DIR "ls"
 
 #define LOWER "to_lower" // 1 argument
 #define UPPER "to_upper"
@@ -63,8 +74,10 @@
 #define TO_ASCII "to_ascii"
 #define TO_TEXT "to_text"
 #define RUN "run"
+#define REMOVE_NUM "rmnum"
+#define REMOVE_TEXT "rmtext"
 
-#define REMOVE "remove" // 2 argument
+#define REMOVE "rmchar" // 2 argument
 #define MULTIPLY_CHAR "multichar"
 #define LIST_PRIME "list_prime"
 #define FILE_SAVE "savefile"
@@ -74,9 +87,11 @@
 #define BASIC_OPERATION "operation"
 #define SPLIT "split"
 #define ROTATE "rotate"
+#define REMOVE_NTH "rmnth"
 
 #define REPLACE "replace" // 3 argument
 #define RANGE "range"
+#define REMOVE_RANGE "rmrange"
 #define ADD_CHAR "add_char"
 #define BASIC_ACC_OPERATION "accoperation"
 #define TO_BASE "to_base"
@@ -97,10 +112,6 @@
 #define MAX_SENTENCE 12
 #define MIN_SENTENCE 2
 
-//For file commands
-#define FILE_TRUNC 0
-#define FILE_APP 1
-#define FILE_ATE 2
 namespace Out
 {
 	template<typename T>

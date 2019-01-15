@@ -530,4 +530,48 @@ namespace String
         }
         return result;
     }
+    std::string removetext(std::string s)
+    {
+        s.erase(std::remove_if(s.begin(),s.end(),[](unsigned char x){return std::isalpha(x);}),s.end());
+        return s;
+    }
+    std::string removenumbers(std::string s)
+    {
+        s.erase(std::remove_if(s.begin(),s.end(),[](unsigned char x){return std::isdigit(x);}),s.end());
+        return s;
+    }
+    std::string removerange(std::string s,const std::string begin, const std::string end)
+    {
+        if(begin.size() > 9 || end.size() > 9)
+            return ERROR_ARGUMENT_SIZE;
+        if(error_isnumber(begin,ERROR_ARGUMENT2_TYPE) == "")
+            return "";
+        if(error_isnumber(end,ERROR_ARGUMENT3_TYPE) == "")
+            return "";
+        unsigned int b = std::stoi(begin), e = std::stoi(end);
+        if(e < b || e > s.size() || b < 0 || b > s.size())
+            return "Wrong range input";
+        s.erase(s.begin()+b,s.end()-(s.size()-e));
+        return s;
+    }
+    std::string removenth(std::string s, const std::string nth)
+    {
+        if(error_size(nth,9,ERROR_ARGUMENT2_SIZE) == "" )
+            return "";
+        if(error_isnumber(nth,ERROR_ARGUMENT2_TYPE) == "")
+            return "";
+        unsigned int a = std::stoi(nth);
+        for(unsigned int i = a; i < s.size(); i += a-1)
+            s.erase(s.begin()+i,s.begin()+i+1);
+        return s;
+    }
+    /*std::string ls()
+    {
+        std::string dirlist = "";
+
+        std::string path = std::filesystem::current_path().string();
+        for(const auto entry : std::filesystem::directory_iterator(path))
+            dirlist += (std::string)entry.path().string() + "\n";
+        return dirlist;
+    }*/
 }
