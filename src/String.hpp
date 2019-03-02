@@ -565,6 +565,7 @@ namespace String
             s.erase(s.begin()+i,s.begin()+i+1);
         return s;
     }
+    // newest GCC for windows doesn't support c++17 <filesystem>, uncomment when it does
     /*std::string ls()
     {
         std::string dirlist = "";

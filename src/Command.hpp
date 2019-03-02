@@ -217,7 +217,6 @@ namespace Command
 
         std::size_t bracket = s.find("(");
         std::string str = (bracket != std::string::npos) ? s.substr(0,bracket) : s;
-
         if(str == FILE_GET)                 command(s,FILE_GET);
         else if(str == ADD_CHAR)            command(s,ADD_CHAR,3);
         else if(str == FILE_SAVE)           command(s,FILE_SAVE,2);
@@ -260,7 +259,7 @@ namespace Command
         else if(str == REMOVE_NTH)          command(s,REMOVE_NTH,2);
         else if(str == CLEAR_CONTAINER)     String::container = "";
         else if(str == SHOW_CONTAINER)      Out::print(String::container);
-        //else if(str == LIST_DIR)            Out::print(String::ls());
+        //else if(str == LIST_DIR)          Out::print(String::ls());
         else                                Out::print(ERROR_COMMAND_NOT_DEFINED);
     }
     std::string run(const std::string s)

@@ -1,9 +1,11 @@
 #pragma once
 #include "Command.hpp"
+#include "MathEngine.hpp"
 
 class Application
 {
     std::string globalInput = "";
+    MathEngine me;
     bool done = false;
     void init()
     {
@@ -58,6 +60,7 @@ public:
 
         if(str == QUIT)             exit();
         else if(str == CLEAR)       clear();
+        else if(isdigit(str[0]))    Out::print(me.calculate(str));
         else                        Command::checkCommand(s);
     }
 };
