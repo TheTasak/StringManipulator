@@ -207,6 +207,8 @@ namespace Command
                 else
                     Out::print(ERROR_NOTSPECIFIED);
             }
+            else
+                Out::print(ERROR_NOTSPECIFIED);
         }
         else
             Out::print(ERROR_NOTSPECIFIED);
@@ -259,7 +261,7 @@ namespace Command
         else if(str == REMOVE_NTH)          command(s,REMOVE_NTH,2);
         else if(str == CLEAR_CONTAINER)     String::container = "";
         else if(str == SHOW_CONTAINER)      Out::print(String::container);
-        //else if(str == LIST_DIR)          Out::print(String::ls());
+        //else if(str == LIST_DIR)            Out::print(String::ls());
         else                                Out::print(ERROR_COMMAND_NOT_DEFINED);
     }
     std::string run(const std::string s)

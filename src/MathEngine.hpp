@@ -4,7 +4,6 @@
 
 class MathEngine //currently with +,-,*,/
 {
-    //v0.3.2 only operation on two numbers
     std::string input;
     std::list<std::string> inputarray;
     int lastresult;
@@ -12,6 +11,7 @@ class MathEngine //currently with +,-,*,/
     {
         std::list<std::string> lis;
         std::string num = "";
+        std::string symbol = "";
         for(unsigned int i = 0; i < s.size(); i++)
         {
             if(s[i] == '+' || s[i] == '-' || s[i] == '/' || s[i] == '*')
@@ -21,7 +21,8 @@ class MathEngine //currently with +,-,*,/
                     lis.push_back(num);
                     num = "";
                 }
-                lis.push_back(std::to_string(s[i]));
+                symbol = s[i];
+                lis.push_back(symbol);
             }
             else if(isdigit(s[i]))
                 num += s[i];
@@ -34,35 +35,30 @@ class MathEngine //currently with +,-,*,/
         lis.push_back(num);
         return lis;
     }
-    std::list<std::string> checkLoop(std::list<std::string> lis, std::string a, std::string b)
+    void checkLoop(std::list<std::string> &lis, std::string a, std::string b)
     {
         for(unsigned int i = 1; i < lis.size(); i++)
         {
             std::list<std::string>::iterator it = std::next(lis.begin(),i);
-            if(*it == a || *it == b)
+            if(*it == a || *it == b) //check for symbols
             {
                 std::list<std::string> temp;
-                for(unsigned int n = 0; n < 3; n++)
-                {
-                    temp.push_back(*std::prev(it));
-                    lis.erase(std::prev(it));
-                }
+                lis.splice(temp.begin(),temp,std::prev(it),std::next(it,2)); // splice singular operation
                 int result = fastcalc(temp);
-                lis.insert(std::prev(it),std::to_string(result));
+                lis.insert(std::next(lis.begin(),i-1),std::to_string(result)); //insert result to equation
                 i = 1;
             }
         }
-        return lis;
     }
     int fastcalc(std::list<std::string> lis)
     {
         std::list<std::string>::iterator it = std::next(lis.begin(),1);
         std::string c = *it;
         int a = std::stoi(*std::prev(it)),b = std::stoi(*std::next(it));
-        if(c == "43")      return a + b;
-        else if(c == "45") return a - b;
-        else if(c == "42") return a * b;
-        else if(c == "47") return a / b;
+        if(c == "+")      return a + b;
+        else if(c == "-") return a - b;
+        else if(c == "*") return a * b;
+        else if(c == "/") return a / b;
 
         return 0;
     }
@@ -82,8 +78,6 @@ class MathEngine //currently with +,-,*,/
         std::list<std::string> lis = splitInput(s);
         checkLoop(lis,"*","/");
         checkLoop(lis,"+","-");
-        if(lis.size() == 3)
-            lis = {std::to_string(fastcalc(lis))};
         lastresult = std::stoi(lis.front());
         return std::stoi(lis.front());
     }
