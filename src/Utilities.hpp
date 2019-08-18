@@ -120,4 +120,26 @@ namespace Out
         if(newline)
             std::cout << std::endl;
     }
+    template<typename T>
+    void print_arr(const T val, const bool newline = false)
+    {
+        for(auto item : val)
+            std::cout << item << " ";
+        if(newline)
+            std::cout << std::endl;
+    }
+}
+namespace Utilities
+{
+    template <typename T>
+    inline bool contains_any(const T s, const std::list<T> searched)
+    {
+        for(auto item : searched)
+        {
+            std::size_t pos = s.find(item);
+            if(pos != std::string::npos)
+                return true;
+        }
+        return false;
+    }
 }

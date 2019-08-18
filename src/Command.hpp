@@ -19,11 +19,8 @@ namespace Command
             std::size_t foundlast = flag.find_last_of("?");
             if(foundfirst != std::string::npos && foundlast != std::string::npos)
                 flag.erase(foundfirst,foundlast);
-            for(int i = 0; i < 9; i++)
-            {
-                if(flag == flagtab[i])
-                    return flagtab[i];
-            }
+            for(std::string s : flagtab)
+                if(flag == s) return s;
             if(flag != "")
                 return FLAG_WRONG;
             return FLAG_BLANK;
