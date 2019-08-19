@@ -12,7 +12,6 @@
 #include <algorithm>
 #include <iostream>
 #include <iterator>
-#include <filesystem>
 #include "windows.h"
 #include <ctime>
 #include <cstdlib>
@@ -84,7 +83,6 @@
 #define COUNT "count"
 #define ROOT "root"
 #define RANDOM "random"
-#define BASIC_OPERATION "operation"
 #define SPLIT "split"
 #define ROTATE "rotate"
 #define REMOVE_NTH "rmnth"
@@ -93,7 +91,6 @@
 #define RANGE "range"
 #define REMOVE_RANGE "rmrange"
 #define ADD_CHAR "add_char"
-#define BASIC_ACC_OPERATION "accoperation"
 #define TO_BASE "to_base"
 
 
@@ -120,5 +117,27 @@ namespace Out
         std::cout << val;
         if(newline)
             std::cout << std::endl;
+    }
+    template<typename T>
+    void print_arr(const T val, const bool newline = false)
+    {
+        for(auto item : val)
+            std::cout << item << " ";
+        if(newline)
+            std::cout << std::endl;
+    }
+}
+namespace Utilities
+{
+    template <typename T>
+    inline bool contains_any(const T s, const std::list<T> searched)
+    {
+        for(auto item : searched)
+        {
+            std::size_t pos = s.find(item);
+            if(pos != std::string::npos)
+                return true;
+        }
+        return false;
     }
 }

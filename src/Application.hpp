@@ -54,10 +54,11 @@ public:
     {
         std::size_t bracket = s.find("(");
         std::string str = (bracket != std::string::npos) ? s.substr(0,bracket) : s;
+        std::string temp (1,str[0]);
 
         if(str == QUIT)             exit();
         else if(str == CLEAR)       clear();
-        else if(isdigit(str[0]))    Out::print(me.calculate(str));
+        else if(isdigit(str[0]) || temp == CONTAINER || temp == LAST_RESULT)    Out::print(me.calculate(str));
         else                        Command::checkCommand(s);
     }
 };
