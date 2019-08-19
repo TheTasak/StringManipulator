@@ -20,12 +20,9 @@ class Application
     {
         done = true;
     }
-    bool checkInput()
+    inline bool checkInput()
     {
-        if(!std::getline(std::cin,globalInput))
-			return false;
-        else
-			return true;
+        return (bool)std::getline(std::cin,globalInput);
     }
     void clear()
     {
