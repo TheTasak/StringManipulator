@@ -156,7 +156,6 @@ namespace Command
                 else if(type == COUNT)                  pointer = &String::count;
                 else if(type == ROOT)                   pointer = &String::root;
                 else if(type == RANDOM)                 pointer = &String::random;
-                else if(type == BASIC_ACC_OPERATION)    pointer = &String::basicAccOperation;
                 else if(type == SPLIT)                  pointer = &String::split;
                 else if(type == ROTATE)                 pointer = &String::rotate;
                 else if(type == REMOVE_NTH)             pointer = &String::removenth;
@@ -190,7 +189,6 @@ namespace Command
                     else if(type == RANGE)              pointer = &String::range;
                     else if(type == ADD_CHAR)           pointer = &String::addChar;
                     else if(type == REMOVE_RANGE)       pointer = &String::removerange;
-                    else if(type == BASIC_OPERATION)    pointer = &String::basicOperation;
                     else if(type == TO_BASE)            pointer = &String::toBase;
                     else                                pointer = nullptr;
 
@@ -234,8 +232,6 @@ namespace Command
         else if(str == ROOT)                command(s,ROOT,2);
         else if(str == RANDOM)              command(s,RANDOM,2);
         else if(str == TO_OPPOSITE)         command(s,TO_OPPOSITE);
-        else if(str == BASIC_OPERATION)     command(s,BASIC_OPERATION,3);
-        else if(str == BASIC_ACC_OPERATION) command(s,BASIC_ACC_OPERATION,2);
         else if(str == FACTORIAL)           command(s,FACTORIAL);
         else if(str == PASSWORD_GEN)        command(s,PASSWORD_GEN);
         else if(str == TEXT_GEN)            command(s,TEXT_GEN);
@@ -258,7 +254,7 @@ namespace Command
         else if(str == REMOVE_NTH)          command(s,REMOVE_NTH,2);
         else if(str == CLEAR_CONTAINER)     String::container = "";
         else if(str == SHOW_CONTAINER)      Out::print(String::container);
-        //else if(str == LIST_DIR)            Out::print(String::ls());
+        //else if(str == LIST_DIR)          Out::print(String::ls());
         else                                Out::print(ERROR_COMMAND_NOT_DEFINED);
     }
     std::string run(const std::string s)

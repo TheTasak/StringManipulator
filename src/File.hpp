@@ -29,7 +29,7 @@ namespace File
             file.open(filename, std::fstream::out | std::fstream::trunc);
         else if(type == FLAG_FILEOUT_APP || type == FLAG_FILEINOUT_APP)
             file.open(filename, std::fstream::out | std::fstream::app);
-        else if(type == FLAG_FILEOUT_APP || type == FLAG_FILEINOUT_APP)
+        else if(type == FLAG_FILEOUT_ATE || type == FLAG_FILEINOUT_ATE)
             file.open(filename, std::fstream::out | std::fstream::ate);
 
         if(file.fail() || !file.is_open())

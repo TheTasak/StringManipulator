@@ -142,74 +142,6 @@ namespace String
         }
         return "True";
     }
-    std::string basicAccOperation(const std::string a, const std::string operation)
-    {
-        bool isMinus = false;
-        std::string atemp = a;
-        if(a[0] == '-' && a.length() > 1)
-        {
-            isMinus = true;
-            atemp.erase(atemp.begin());
-        }
-        else if(a[0] == '-' && a.length() <= 1)
-            return ERROR_ARGUMENT_TYPE;
-        if(error_isnumber(atemp,ERROR_ARGUMENT_TYPE) == "")
-            return "";
-        if(error_size(atemp,9,ERROR_ARGUMENT_SIZE) == "")
-            return "";
-
-        long long temp = std::stoll(atemp);
-        if(isMinus) temp = -temp;
-		String::lastResult = std::to_string(temp);
-		if(operation == "+") String::accumulator += temp;
-		else if(operation == "-") String::accumulator -= temp;
-		else if(operation == "*") String::accumulator *= temp;
-		else if(operation == "/") String::accumulator = (temp != 0) ? String::accumulator /= temp : String::accumulator;
-		else Out::print("Incorrect operation",true);
-		return std::to_string(String::accumulator);
-    }
-    std::string basicOperation(const std::string a, const std::string b, const std::string operation)
-    {
-        std::string atemp = a;
-        std::string btemp = b;
-        bool isMinusA = false, isMinusB = false;
-        if(a[0] == '-' && a.length() > 1)
-        {
-            isMinusA = true;
-            atemp.erase(atemp.begin());
-        }
-        else if(a[0] == '-' && a.length() <= 1)
-            return ERROR_ARGUMENT1_TYPE;
-        if(b[0] == '-' && b.length() > 1)
-        {
-            isMinusB = true;
-            btemp.erase(btemp.begin());
-        }
-        else if(b[0] == '-' && b.length() <= 1)
-            return ERROR_ARGUMENT2_TYPE;
-        if(error_isnumber(atemp,ERROR_ARGUMENT1_TYPE) == "")
-            return "";
-        if(error_isnumber(btemp,ERROR_ARGUMENT2_TYPE) == "")
-            return "";
-        if(error_size(atemp,9,ERROR_ARGUMENT1_SIZE) == "")
-            return "";
-        if(error_size(btemp,9,ERROR_ARGUMENT2_SIZE) == "")
-            return "";
-
-        long long temp, temp2;
-        temp = std::stoll(atemp);
-        temp2 = std::stoll(btemp);
-        temp = isMinusA ? -temp : temp;
-        temp2 = isMinusB ? -temp2 : temp2;
-
-        long long result;
-        if(operation == "+") result = temp + temp2;
-		else if(operation == "-") result = temp - temp2;
-		else if(operation == "*") result = temp * temp2;
-		else if(operation == "/") result = (temp2 != 0) ? temp / temp2 : temp2;
-		else Out::print("Incorrect operation",true);
-        return std::to_string(result);
-    }
     std::string list_to_string(const std::list<int> vec)
     {
         std::string str = "";
@@ -324,11 +256,11 @@ namespace String
             return "";
         int number = std::stoi(num),nt = std::stoi(n);
         if(nt < 1) return "1";
-        else if(nt == 1) return std::to_string(number);
+        else if(nt == 1) return num;
 
         float nthroot = std::pow(number,nt);
         int in = (int)std::floor(nthroot);
-        if(in == -2147483648)
+        if(in < 0)
         {
             Out::print(ERROR_ARGUMENT_SIZE);
             return "";

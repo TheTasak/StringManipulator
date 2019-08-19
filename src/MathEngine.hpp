@@ -12,26 +12,44 @@ class MathEngine //currently with +,-,*,/
         std::list<std::string> lis;
         std::string num = "";
         std::string symbol = "";
+        std::string temp = "";
 
         const std::list<std::string> symbol_list = {"+","-","*","/","%","^"};
         for(unsigned int i = 0; i < s.size(); i++)
         {
-            symbol = s[i];
-            if(Utilities::contains_any(symbol,symbol_list))
+            temp = s[i];
+            if(Utilities::contains_any(temp,symbol_list) && symbol == "")
             {
+                symbol = temp;
                 if(num != "")
                 {
                     lis.push_back(num);
                     num = "";
+                    lis.push_back(symbol);
                 }
-                lis.push_back(symbol);
             }
-            else if(isdigit(s[i]))
-                num += s[i];
+            else if(String::is_digit(temp) == "True")
+            {
+                num += temp;
+                symbol = "";
+            }
+            else if((temp == LAST_RESULT && String::lastResult != "") || (temp == CONTAINER && String::container != ""))
+            {
+                if(temp == LAST_RESULT && String::is_digit(String::lastResult) == "True")
+                    num += String::lastResult;
+                else if(temp == CONTAINER && String::is_digit(String::container) == "True")
+                    num += String::container;
+                else
+                {
+                    Out::print("Incorrect input. Returning error...",true);
+                    return std::list<std::string>{};
+                }
+                symbol = "";
+            }
             else if(s[i] != ' ')
             {
                 Out::print("Unknown input. Returning error...",true);
-                break;
+                return std::list<std::string>{};
             }
         }
         lis.push_back(num);
@@ -87,10 +105,14 @@ class MathEngine //currently with +,-,*,/
     int calculate(std::string s)
     {
         std::list<std::string> lis = splitInput(s);
+        Out::print_arr(lis,true);
         checkLoop(lis,"^");
         checkLoop(lis,"*/%");
         checkLoop(lis,"+-");
+        if(lis.empty())
+            return 0;
         lastresult = std::stoi(lis.front());
+        String::lastResult = lis.front();
         return std::stoi(lis.front());
     }
 };

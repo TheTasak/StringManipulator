@@ -83,7 +83,6 @@
 #define COUNT "count"
 #define ROOT "root"
 #define RANDOM "random"
-#define BASIC_OPERATION "operation"
 #define SPLIT "split"
 #define ROTATE "rotate"
 #define REMOVE_NTH "rmnth"
@@ -92,7 +91,6 @@
 #define RANGE "range"
 #define REMOVE_RANGE "rmrange"
 #define ADD_CHAR "add_char"
-#define BASIC_ACC_OPERATION "accoperation"
 #define TO_BASE "to_base"
 
 
